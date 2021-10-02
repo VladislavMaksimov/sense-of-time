@@ -1,6 +1,15 @@
 const backgroundWidth = 500;
 const backgroundHeight = 300;
 
+// переводит координаты из системы элемента canvas (считаются от левого верхнего угла) в нашу систему координат
+const translateCoords = (shape) => {
+  const canvasCoordX = shape.getAttr("x");
+  const canvasCoordY = shape.getAttr("y");
+  const ourCoordX = canvasCoordX - backgroundWidth / 2;
+  const ourCoordY = backgroundHeight / 2 - canvasCoordY;
+  return { x: ourCoordX, y: ourCoordY };
+};
+
 // создаёт ось
 const createCoordLine = (x, y, endX, endY, pointerLength) => {
   const pointerWidth = 10;
@@ -94,14 +103,97 @@ const addBackgroundColor = (background, color) => {
 };
 
 const drawBackground = (stage) => {
-  const background = new Konva.Layer();
+  const backgroundLayer = new Konva.Layer();
 
-  addBackgroundColor(background, "#c2c0ba30");
-  addCoordLines(background, stage);
-  addCoordText(background, stage);
+  addBackgroundColor(backgroundLayer, "#c2c0ba30");
+  addCoordLines(backgroundLayer, stage);
+  addCoordText(backgroundLayer, stage);
 
-  stage.add(background);
-  background.draw();
+  stage.add(backgroundLayer);
+  backgroundLayer.draw();
+};
+
+const addMarkFigure = (markGroup) => {
+  const markX = 0;
+  const markY = 0;
+  const markRadius = 20;
+  const markAngle = 60;
+  const markRotation = -1 * (90 + markAngle / 2);
+  const markColor = "#ff0000";
+  const markStrokeColor = "#000000";
+  const markStrokeWidth = 2;
+
+  const mark = new Konva.Wedge({
+    x: markX,
+    y: markY,
+    radius: markRadius,
+    angle: markAngle,
+    fill: markColor,
+    stroke: markStrokeColor,
+    strokeWidth: markStrokeWidth,
+    rotation: markRotation,
+  });
+
+  markGroup.add(mark);
+
+  return markRadius;
+};
+
+const addMarkText = (markGroup, textContent, markRadius) => {
+  const textX = -50;
+  const fontSize = 14;
+  const textColor = "#000000";
+  const fontFamily = "Calibri";
+  const textWidth = 100;
+  const textAlign = "center";
+
+  const text = new Konva.Text({
+    x: textX,
+    text: textContent,
+    fontSize: fontSize,
+    fontFamily: fontFamily,
+    fill: textColor,
+    align: textAlign,
+    width: textWidth,
+  });
+  // ставит текст над меткой
+  text.setAttr("y", -1 * text.height() - markRadius);
+
+  markGroup.add(text);
+};
+
+const addMark = (marksLayer, textContent) => {
+  const markWithTextX = backgroundWidth - backgroundWidth / 4;
+  const markWithTextY = backgroundHeight - backgroundHeight / 1.5;
+
+  const markWithText = new Konva.Group({
+    x: markWithTextX,
+    y: markWithTextY,
+    draggable: true,
+  });
+
+  const markRadius = addMarkFigure(markWithText);
+  addMarkText(markWithText, textContent, markRadius);
+
+  markWithText.addEventListener("dragend", (e) => {
+    const coords = translateCoords(markWithText);
+    document.getElementById("coordX").innerText = coords.x;
+    document.getElementById("coordY").innerText = coords.y;
+  });
+
+  marksLayer.add(markWithText);
+};
+
+const drawMarks = (stage) => {
+  const marksLayer = new Konva.Layer();
+  stage.add(marksLayer);
+
+  addMark(
+    marksLayer,
+    "Эвакуация Ленинградского академического театра оперы и балета"
+  );
+
+  marksLayer.draw();
 };
 
 window.addEventListener("load", () => {
@@ -112,4 +204,5 @@ window.addEventListener("load", () => {
   });
 
   drawBackground(stage);
+  drawMarks(stage);
 });
