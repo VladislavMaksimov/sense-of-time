@@ -42,53 +42,66 @@ const addCoordLines = (background) => {
     0,
     pointerLength
   );
-  const coordLineY = createCoordLine(
+  const coordLineYup = createCoordLine(
     backgroundWidth / 2,
-    backgroundHeight,
+    backgroundHeight / 2,
     0,
-    -1 * (backgroundHeight - pointerLength / 2),
+    -1 * (backgroundHeight / 2 - pointerLength / 2),
     pointerLength
   );
-
+  const coordLineYdown = createCoordLine(
+    backgroundWidth / 2,
+    backgroundHeight / 2,
+    0,
+    backgroundHeight / 2 - pointerLength / 2,
+    pointerLength
+  );
   background.add(coordLineX);
-  background.add(coordLineY);
+  background.add(coordLineYup);
+  background.add(coordLineYdown);
+};
+
+const createCoordText = (content, x, y, fontSize) => {
+  const textColor = "#000000";
+  const fontFamily = "Calibri";
+  return new Konva.Text({
+    x: x,
+    y: y,
+    text: content,
+    fontSize: fontSize,
+    fontFamily: fontFamily,
+    fill: textColor
+  });
 };
 
 // создаёт текст на оси Y
-const addCoordText = (background) => {
-  // общие значения
+const addCoordTexts = (background) => {
   const fontSize = 16;
-  const textColor = "#000000";
+
   const leftTextContent = "Прошлое";
   const rightTextContent = "Настоящее";
-  const fontFamily = "Calibri";
+  const upTextContent = "Заметность";
+  const downTextContent = "Незаметность";
 
   // координаты начала текстов
-  const leftX = 0;
+  const leftX = 5;
   const leftY = backgroundHeight / 2 - fontSize * 2;
   const rightX = backgroundWidth - rightTextContent.length * (fontSize / 1.8);
   const rightY = backgroundHeight / 2 - fontSize * 2;
+  const upX = backgroundWidth / 2 + 15;
+  const upY = 5;
+  const downX = backgroundWidth / 2 + 15;
+  const downY = backgroundHeight - fontSize - 5;
 
-  const leftText = new Konva.Text({
-    x: leftX,
-    y: leftY,
-    text: leftTextContent,
-    fontSize: fontSize,
-    fontFamily: fontFamily,
-    fill: textColor,
-  });
-
-  const rightText = new Konva.Text({
-    x: rightX,
-    y: rightY,
-    text: rightTextContent,
-    fontSize: fontSize,
-    fontFamily: fontFamily,
-    fill: textColor,
-  });
+  const leftText = createCoordText(leftTextContent, leftX, leftY, fontSize);
+  const rightText = createCoordText(rightTextContent, rightX, rightY, fontSize);
+  const upText = createCoordText(upTextContent, upX, upY, fontSize);
+  const downText = createCoordText(downTextContent, downX, downY, fontSize);
 
   background.add(leftText);
   background.add(rightText);
+  background.add(upText);
+  background.add(downText);
 };
 
 const addBackgroundColor = (background, color) => {
@@ -107,7 +120,7 @@ const drawBackground = (stage) => {
 
   addBackgroundColor(backgroundLayer, "#c2c0ba30");
   addCoordLines(backgroundLayer, stage);
-  addCoordText(backgroundLayer, stage);
+  addCoordTexts(backgroundLayer, stage);
 
   stage.add(backgroundLayer);
   backgroundLayer.draw();
@@ -163,7 +176,7 @@ const addMarkText = (markGroup, textContent, markRadius) => {
 };
 
 const addMark = (marksLayer, textContent) => {
-  const markWithTextX = backgroundWidth - backgroundWidth / 4;
+  const markWithTextX = backgroundWidth - backgroundWidth / 5;
   const markWithTextY = backgroundHeight - backgroundHeight / 1.5;
 
   const markWithText = new Konva.Group({
