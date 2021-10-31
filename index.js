@@ -70,7 +70,7 @@ const createCoordText = (content, x, y, fontSize) => {
     text: content,
     fontSize: fontSize,
     fontFamily: fontFamily,
-    fill: textColor
+    fill: textColor,
   });
 };
 
@@ -188,11 +188,11 @@ const addMark = (marksLayer, textContent) => {
   const markRadius = addMarkFigure(markWithText);
   addMarkText(markWithText, textContent, markRadius);
 
-  markWithText.addEventListener("dragend", (e) => {
-    const coords = translateCoords(markWithText);
-    document.getElementById("coordX").innerText = coords.x;
-    document.getElementById("coordY").innerText = coords.y;
-  });
+  // markWithText.addEventListener("dragend", (e) => {
+  //   const coords = translateCoords(markWithText);
+  //   document.getElementById("coordX").innerText = coords.x;
+  //   document.getElementById("coordY").innerText = coords.y;
+  // });
 
   marksLayer.add(markWithText);
 };
@@ -211,7 +211,7 @@ const drawMarks = (stage) => {
 
 window.addEventListener("load", () => {
   const stage = new Konva.Stage({
-    container: "questionnaire",
+    container: "collective-memory-questionnaire",
     width: backgroundWidth,
     height: backgroundHeight,
   });
