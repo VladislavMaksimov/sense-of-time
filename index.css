@@ -4,8 +4,6 @@
   src: url("./fonts/MyriadPro-Regular.eot?#iefix") format("embedded-opentype"),
     url("./fonts/MyriadPro-Regular.woff") format("woff"),
     url("./fonts/MyriadPro-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
 }
 
 * {
@@ -18,17 +16,32 @@
 body {
   font-family: "Myriad Pro Regular", Arial, Helvetica, sans-serif;
   font-size: 16px;
+  line-height: 24px;
 }
 
 h1 {
   font-weight: normal;
   font-style: normal;
+  font-size: 48px;
+  line-height: 64px;
+}
+
+h2 {
+  font-style: normal;
+  font-size: 32px;
+  line-height: 64px;
+}
+
+h3 {
+  font-style: normal;
+  font-size: 24px;
+  line-height: 64px;
 }
 
 #header {
   overflow: hidden;
   height: 126px;
-  padding: 20px 80px;
+  padding: 20px 240px;
   background-color: #74bdb0;
   color: #fff;
 }
@@ -38,7 +51,6 @@ h1 {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 44px;
 }
 
 #header > img {
@@ -47,7 +59,12 @@ h1 {
 }
 
 #main {
-  padding: 40px 80px;
+  padding: 40px 240px;
+  border-bottom: 3px solid #ebebeb;
+}
+
+#main > * {
+  margin-bottom: 40px;
 }
 
 #greetings {
@@ -57,16 +74,32 @@ h1 {
 #greetings img {
   width: 219px;
   height: 139px;
-  background-color: #d9bce8;
   float: right;
-  border: 1px solid #000;
 }
 
 #greetings-text {
-  max-width: 500px;
+  padding-right: 50%;
   font-size: 20px;
+  line-height: 32px;
 }
 
-#questionnaire {
+#collective-memory-questionnaire {
+  width: 500px;
   height: 300px;
+  margin: 0 auto 0 auto;
+}
+
+#footer {
+  padding: 40px 240px;
+}
+
+#submit {
+    display: block;
+    margin: 0 auto 0 auto;
+    padding: 16px 32px;
+    text-transform: uppercase;
+    border: 1px solid #000;
+    border-radius: 50px;
+    background-color: #f0f0f0;
+    cursor: pointer;
 }
