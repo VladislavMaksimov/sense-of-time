@@ -1,3 +1,50 @@
+@font-face {
+  font-family: "Myriad Pro Regular";
+  src: url("./fonts/MyriadPro-Regular.eot");
+  src: url("./fonts/MyriadPro-Regular.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/MyriadPro-Regular.woff") format("woff"),
+    url("./fonts/MyriadPro-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  font-family: "Myriad Pro Regular", Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-weight: normal;
+  font-style: normal;
+}
+
+#header {
+  overflow: hidden;
+  height: 126px;
+  padding: 20px 80px;
+  background-color: #74bdb0;
+  color: #fff;
+}
+
+#header > h1 {
+  float: left;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 44px;
+}
+
+#header > img {
+  height: 86px;
+  float: right;
+}
+
 #questionnaire {
-    height: 300px;
+  height: 300px;
 }
