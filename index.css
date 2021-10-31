@@ -17,6 +17,7 @@
 
 body {
   font-family: "Myriad Pro Regular", Arial, Helvetica, sans-serif;
+  font-size: 16px;
 }
 
 h1 {
@@ -43,6 +44,27 @@ h1 {
 #header > img {
   height: 86px;
   float: right;
+}
+
+#main {
+  padding: 40px 80px;
+}
+
+#greetings {
+  overflow: hidden;
+}
+
+#greetings img {
+  width: 219px;
+  height: 139px;
+  background-color: #d9bce8;
+  float: right;
+  border: 1px solid #000;
+}
+
+#greetings-text {
+  max-width: 500px;
+  font-size: 20px;
 }
 
 #questionnaire {
