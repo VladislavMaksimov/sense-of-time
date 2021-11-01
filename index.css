@@ -86,6 +86,47 @@ h3 {
   line-height: 32px;
 }
 
+.common-questions-item {
+  margin-bottom: 20px;
+}
+
+.last-item {
+  margin-bottom: 0;
+}
+
+.common-questions-item-label {
+  margin-bottom: 10px;
+}
+
+.left-radio {
+  margin-right: 8px;
+}
+
+#year-of-birth {
+  width: 90px;
+}
+
+#education,
+#profession {
+  width: 250px;
+}
+
+#activities td {
+  padding: 8px 8px;
+}
+
+#activities .activity {
+  padding: 8px 10px 8px 0px;
+}
+
+#activities #activities-first-row > td {
+  padding-top: 0px;
+}
+
+#activities #activities-last-row > td {
+  padding-bottom: 0px;
+}
+
 #collective-memory-questionnaire {
   width: 500px;
   height: 300px;
@@ -117,4 +158,14 @@ h3 {
   color: #ff0000;
   font-size: 60px;
   line-height: 60px;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 6px 12px;
+  border: 1px solid #636363;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  font-size: 16px;
 }

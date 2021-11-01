@@ -209,6 +209,51 @@ const drawMarks = (stage) => {
   marksLayer.draw();
 };
 
+// получает значения выбранных кнопок (radio buttons)
+const getCheckedRadio = (name) => {
+  const radioButtons = document.getElementsByName(name);
+  let value = null;
+  for (let i = 0; i < radioButtons.length; i++)
+    if (radioButtons[i].checked) {
+      value = radioButtons[i].value;
+      break;
+    }
+  return value;
+};
+
+// получает сферы деятельности
+const getActivities = () => {
+  let activities = [];
+  const activityItems = document.getElementsByClassName("activities-item");
+  for (let i = 0; i < activityItems.length; i++) {
+    const name = activityItems[i].children[1].children[0].name;
+    const value = getCheckedRadio(name);
+    activities.push({ name: value });
+  }
+  return activities;
+};
+
+// отправляет результаты опроса на сервер
+const submitAnswers = () => {
+  const gender = getCheckedRadio("gender");
+  const yearOfBirth = document.getElementById("year-of-birth").value;
+  const permKraiLiving = getCheckedRadio("perm-krai-living");
+  const education = document.getElementById("education").value;
+  const profession = document.getElementById("profession").value;
+  const activites = getActivities();
+
+  const data = {
+    Gender: gender,
+    Year: yearOfBirth,
+    PremKrai: permKraiLiving,
+    Education: education,
+    Profession: profession,
+    Activities: activites,
+  };
+
+  console.log(data);
+};
+
 window.addEventListener("load", () => {
   const stage = new Konva.Stage({
     container: "collective-memory-questionnaire",
@@ -218,4 +263,7 @@ window.addEventListener("load", () => {
 
   drawBackground(stage);
   drawMarks(stage);
+
+  const submit = document.getElementById("submit");
+  submit.addEventListener("click", submitAnswers);
 });

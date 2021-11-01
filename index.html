@@ -26,6 +26,7 @@
       </noscript>
       <!-- /Сообщение в случае, если не работает JavaScript -->
 
+      <!-- Приветствие и фото команды -->
       <div id="greetings">
         <p>
           <img alt="" />
@@ -37,28 +38,42 @@
           </p>
         </p>
       </div>
+      <!-- /Приветствие и фото команды -->
 
       <form id="common-questions">
         <h2>Общие вопросы</h2>
 
+        <!-- Выбор пола -->
         <div class="common-questions-item">
-          <p>
+          <p class="common-questions-item-label">
             Пол
           </p>
           <p>
-            <label for="gender-male">
-              М
-              <input type="radio" name="gender" id="gender-male">
+            <label for="gender-male" class="left-radio">
+              <input 
+                type="radio" 
+                name="gender" 
+                id="gender-male"
+                value="М"
+              >
+              Мужской
             </label>
             <label for="gender-female">
-              Ж
-              <input type="radio" name="gender" id="gender-female">
+              <input 
+                type="radio" 
+                name="gender" 
+                id="gender-female"
+                value="Ж"
+              >
+              Женский
             </label>
           </p>
         </div>
+        <!-- /Выбор пола -->
 
+        <!-- Выбор года рождения -->
         <div class="common-questions-item">
-          <p>
+          <p class="common-questions-item-label">
             <label for="year-of-birth">Год рождения</label>
           </p>
           <p>
@@ -67,29 +82,336 @@
               name="year-of-birth" 
               id="year-of-birth" 
               min="1900" 
-              style="border: 1px solid black"
             >
           </p>
         </div>
+        <!-- /Выбор года рождения -->
 
+        <!-- Жил ли пользователь в Пермском крае -->
         <div class="common-questions-item">
-          <p>
-            Вы живете сейчас или когда-либо жили в Пермском крае более год?
+          <p class="common-questions-item-label">
+            Вы живете сейчас или когда-либо жили в Пермском крае более года?
           </p>
           <p>
-            <label for="">
+            <label for="perm-krai-living-yes" class="left-radio">
+              <input 
+                type="radio" 
+                name="perm-krai-living" 
+                id="perm-krai-living-yes"
+                value="да"
+              >
               Да
-              <input type="radio" name="" id="">
             </label>
-            <label for="">
+            <label for="perm-krai-living-no">
+              <input 
+                type="radio" 
+                name="perm-krai-living" 
+                id="perm-krai-living-no"
+                value="нет"
+              >
               Нет
-              <input type="radio" name="" id="">
             </label>
           </p>
         </div>
+        <!-- /Жил ли пользователь в Пермском крае -->
+
+        <!-- Образование пользователя -->
+        <div class="common-questions-item">
+          <p class="common-questions-item-label">
+            <label for="education">Образование</label>
+          </p>
+          <p>
+            <input type="text" name="education" id="education">
+          </p>
+        </div>
+        <!-- /Образование пользователя -->
+
+        <!-- Профессия пользователя -->
+        <div class="common-questions-item">
+          <p class="common-questions-item-label">
+            <label for="profession">Профессия</label>
+          </p>
+          <p>
+            <input type="text" name="profession" id="profession">
+          </p>
+        </div>
+        <!-- /Профессия пользователя -->
+
+        <!-- Сферы деятельности пользователя -->
+        <div class="common-questions-item last-item">
+          <p class="common-questions-item-label">
+            Насколько вы вовлечены в данные сферы? 1 – совершенно не разбираюсь, 7 – являюсь экспертом.
+          </p>
+          <p>
+            <table id="activities">
+              <thead>
+                <tr id="activities-first-row">
+                  <td class="activity"></td>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                  <td>5</td>
+                  <td>6</td>
+                  <td>7</td>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Культура -->
+                <tr class="activities-item">
+                  <td class="activity">Культура</td>
+                  <td>
+                    <input 
+                      type="radio"
+                      name="culture"
+                      id="culture-1"
+                      value="1"
+                    ></td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="culture" 
+                      id="culture-2"
+                      value="2"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="culture" 
+                      id="culture-3"
+                      value="3"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="culture" 
+                      id="culture-4"
+                      value="4"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="culture" 
+                      id="culture-5"
+                      value="5"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="culture" 
+                      id="culture-6"
+                      value="6"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="culture" 
+                      id="culture-7"
+                      value="7">
+                  </td>
+                </tr>
+                <!-- /Культура -->
+
+                <!-- Промышленность -->
+                <tr class="activities-item">
+                  <td class="activity">Промышленность</td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="industry" 
+                      id="industry-1"
+                      value="1"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="industry" 
+                      id="industry-2"
+                      value="2"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="industry" 
+                      id="industry-3"
+                      value="3"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="industry" 
+                      id="industry-4"
+                      value="4"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="industry" 
+                      id="industry-5"
+                      value="5"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="industry" 
+                      id="industry-6"
+                      value="6"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="industry" 
+                      id="industry-7"
+                      value="7"
+                    >
+                  </td>
+                </tr>
+                <!-- /Промышленность -->
+
+                <!-- История -->
+                <tr class="activities-item">
+                  <td class="activity">История</td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="history" 
+                      id="history-1"
+                      value="1"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="history" 
+                      id="history-2"
+                      value="2"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="history" 
+                      id="history-3"
+                      value="3"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="history" 
+                      id="history-4"
+                      value="4"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="history" 
+                      id="history-5"
+                      value="5"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="history" 
+                      id="history-6"
+                      value="6"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="history" 
+                      id="history-7"
+                      value="7"
+                    >
+                  </td>
+                </tr>
+                <!-- /История -->
+
+                <!-- Политика -->
+                <tr id="activities-last-row" class="activities-item">
+                  <td class="activity">Политика</td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="politics" 
+                      id="politics-1"
+                      value="1"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="politics" 
+                      id="politics-2"
+                      value="2"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="politics" 
+                      id="politics-3"
+                      value="3"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="politics" 
+                      id="politics-4"
+                      value="4"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="politics" 
+                      id="politics-5"
+                      value="5"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="politics" 
+                      id="politics-6"
+                      value="6"
+                    >
+                  </td>
+                  <td>
+                    <input 
+                      type="radio" 
+                      name="politics" 
+                      id="politics-7"
+                      value="7"
+                    >
+                  </td>
+                </tr>
+                <!-- /Политика -->
+
+              </tbody>
+            </table>
+          </p>
+        </div>
+        <!-- /Сферы деятельности пользователя -->
 
       </form>
 
+      <!-- Часть с опросом по истории Перми -->
       <div id="collective-memory">
         <h2 style="color: red;">Здесь напрашивается заголовок</h2>
         <p>
@@ -108,6 +430,7 @@
         </p>
       </div>
 
+      <!-- Поле с метками -->
       <div id="collective-memory-questionnaire-wrapper">
         <div id="collective-memory-questionnaire">
           <!-- Сообщение в случае, если не отобразится опросник -->
@@ -117,6 +440,9 @@
           <!-- /Сообщение в случае, если не отобразится опросник -->
         </div>
       </div>
+      <!-- /Поле с метками -->
+      
+      <!-- /Часть с опросом по истории Перми -->
       
     </div>
 
