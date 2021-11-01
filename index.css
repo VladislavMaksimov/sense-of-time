@@ -108,3 +108,13 @@ h3 {
   background-color: #f0f0f0;
   cursor: pointer;
 }
+
+#no-js-alert {
+  margin-bottom: 40px;
+}
+
+.critical-alert {
+  color: #ff0000;
+  font-size: 60px;
+  line-height: 60px;
+}

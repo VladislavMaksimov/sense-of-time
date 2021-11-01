@@ -17,9 +17,18 @@
     </div>
 
     <div id="main">
+
+      <!-- Сообщение в случае, если не работает JavaScript -->
+      <noscript>
+        <h1 id="no-js-alert" class="critical-alert">
+          Если вы видите это сообщение, пожалуйста, включите JavaScript в вашем браузере или обновите браузер.
+        </h1> 
+      </noscript>
+      <!-- /Сообщение в случае, если не работает JavaScript -->
+
       <div id="greetings">
         <p>
-          <img src="" alt="" />
+          <img alt="" />
           <p id="greetings-text">
             Рады приветствовать на нашем ресурсе. Мы – команда из пермской Вышки,
             занимаемся изучением субъективного восприятия локальной истории г.
@@ -29,10 +38,60 @@
         </p>
       </div>
 
-      <div id="common-questions"></div>
+      <form id="common-questions">
+        <h2>Общие вопросы</h2>
+
+        <div class="common-questions-item">
+          <p>
+            Пол
+          </p>
+          <p>
+            <label for="gender-male">
+              М
+              <input type="radio" name="gender" id="gender-male">
+            </label>
+            <label for="gender-female">
+              Ж
+              <input type="radio" name="gender" id="gender-female">
+            </label>
+          </p>
+        </div>
+
+        <div class="common-questions-item">
+          <p>
+            <label for="year-of-birth">Год рождения</label>
+          </p>
+          <p>
+            <input 
+              type="number" 
+              name="year-of-birth" 
+              id="year-of-birth" 
+              min="1900" 
+              style="border: 1px solid black"
+            >
+          </p>
+        </div>
+
+        <div class="common-questions-item">
+          <p>
+            Вы живете сейчас или когда-либо жили в Пермском крае более год?
+          </p>
+          <p>
+            <label for="">
+              Да
+              <input type="radio" name="" id="">
+            </label>
+            <label for="">
+              Нет
+              <input type="radio" name="" id="">
+            </label>
+          </p>
+        </div>
+
+      </form>
 
       <div id="collective-memory">
-        <h2>Здесь напрашивается заголовок</h2>
+        <h2 style="color: red;">Здесь напрашивается заголовок</h2>
         <p>
           Перед вами будут представлены пары исторических событий.
           Вам необходимо расположить эти события на осях координат. <br>
@@ -50,8 +109,15 @@
       </div>
 
       <div id="collective-memory-questionnaire-wrapper">
-        <div id="collective-memory-questionnaire"></div>
+        <div id="collective-memory-questionnaire">
+          <!-- Сообщение в случае, если не отобразится опросник -->
+          <h1 class="critical-alert">
+            Если вы видите это сообщение, пожалуйста, включите JavaScript в вашем браузере или обновите браузер.
+          </h1>
+          <!-- /Сообщение в случае, если не отобразится опросник -->
+        </div>
       </div>
+      
     </div>
 
     <div id="footer">

@@ -103,3 +103,15 @@ h3 {
   background-color: #f0f0f0;
   cursor: pointer;
 }
+
+// сообщение будет показано, если у пользователя не работает JavaScript
+#no-js-alert {
+  margin-bottom: 40px;
+}
+
+// сообщение будет показано, если Canvas или JavaScript у пользователя не работает
+.critical-alert {
+  color: #ff0000;
+  font-size: 60px;
+  line-height: 60px;
+}
