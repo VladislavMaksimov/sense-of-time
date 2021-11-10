@@ -72,36 +72,49 @@ const createCoordText = (content, x, y, fontSize) => {
     fontFamily: fontFamily,
     fill: textColor,
   });
+  // return coordText;
 };
 
 // создаёт текст на оси Y
 const addCoordTexts = (background) => {
   const fontSize = 16;
 
-  const leftTextContent = "Прошлое";
-  const rightTextContent = "Настоящее";
   const upTextContent = "Заметность";
+  const rightTextContent = "Настоящее";
   const downTextContent = "Незаметность";
+  const leftTextContent = "Прошлое";
 
   // координаты начала текстов
-  const leftX = 5;
-  const leftY = backgroundHeight / 2 - fontSize * 2;
-  const rightX = backgroundWidth - rightTextContent.length * (fontSize / 1.8);
-  const rightY = backgroundHeight / 2 - fontSize * 2;
-  const upX = backgroundWidth / 2 + 15;
-  const upY = 5;
-  const downX = backgroundWidth / 2 + 15;
-  const downY = backgroundHeight - fontSize - 5;
+  const upX = backgroundWidth / 2;
+  const upY = 0;
+  const rightX = backgroundWidth;
+  const rightY = backgroundHeight / 2;
+  const downX = backgroundWidth / 2;
+  const downY = backgroundHeight;
+  const leftX = 0;
+  const leftY = backgroundHeight / 2;
 
-  const leftText = createCoordText(leftTextContent, leftX, leftY, fontSize);
-  const rightText = createCoordText(rightTextContent, rightX, rightY, fontSize);
+  // создание текстов
   const upText = createCoordText(upTextContent, upX, upY, fontSize);
+  const rightText = createCoordText(rightTextContent, rightX, rightY, fontSize);
   const downText = createCoordText(downTextContent, downX, downY, fontSize);
+  const leftText = createCoordText(leftTextContent, leftX, leftY, fontSize);
 
-  background.add(leftText);
-  background.add(rightText);
+  // сдвиг текстов вверх/вниз и вправо/влево
+  upText.offsetX(-15);
+  upText.offsetY(-5);
+  rightText.offsetX(rightText.width() + 5);
+  rightText.offsetY(rightText.height() + 10);
+  downText.offsetX(-15);
+  downText.offsetY(downText.height() + 5);
+  leftText.offsetX(-5);
+  leftText.offsetY(rightText.height() + 10);
+
+  // добавление текстов на интерфейс
   background.add(upText);
+  background.add(rightText);
   background.add(downText);
+  background.add(leftText);
 };
 
 const addBackgroundColor = (background, color) => {
