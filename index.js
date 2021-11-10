@@ -1,5 +1,5 @@
-const backgroundWidth = 500;
-const backgroundHeight = 300;
+let backgroundWidth = BACKGROUND_WIDTH_INITIAL;
+let backgroundHeight = BACKGROUND_HEIGHT_INITIAL;
 
 // переводит координаты из системы элемента canvas (считаются от левого верхнего угла) в нашу систему координат
 const translateCoords = (shape) => {
@@ -72,7 +72,6 @@ const createCoordText = (content, x, y, fontSize) => {
     fontFamily: fontFamily,
     fill: textColor,
   });
-  // return coordText;
 };
 
 // создаёт текст на оси Y
@@ -268,6 +267,12 @@ const submitAnswers = () => {
 };
 
 window.addEventListener("load", () => {
+  const collectiveMemoryQuestionnaire = document.getElementById(
+    "collective-memory-questionnaire"
+  );
+  backgroundWidth = collectiveMemoryQuestionnaire.offsetWidth;
+  backgroundHeight = collectiveMemoryQuestionnaire.offsetHeight;
+
   const stage = new Konva.Stage({
     container: "collective-memory-questionnaire",
     width: backgroundWidth,
