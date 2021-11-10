@@ -79,10 +79,10 @@ const createCoordText = (content, x, y, fontSize) => {
 const addCoordTexts = (background) => {
   const fontSize = 16;
 
-  const upTextContent = "Заметность";
-  const rightTextContent = "Настоящее";
-  const downTextContent = "Незаметность";
-  const leftTextContent = "Прошлое";
+  const upTextContent = TEXT_SIGNIFICANT;
+  const rightTextContent = TEXT_PRESENT;
+  const downTextContent = TEXT_UNSIGNIFICANT;
+  const leftTextContent = TEXT_PAST;
 
   // координаты начала текстов
   const upX = backgroundWidth / 2;
