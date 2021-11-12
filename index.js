@@ -1,5 +1,6 @@
 let backgroundWidth = BACKGROUND_WIDTH_INITIAL;
 let backgroundHeight = BACKGROUND_HEIGHT_INITIAL;
+let marksSpawnHeight = BACKGROUND_HEIGHT_INITIAL / 5;
 
 // переводит координаты из системы элемента canvas (считаются от левого верхнего угла) в нашу систему координат
 const translateCoords = (shape) => {
@@ -11,7 +12,7 @@ const translateCoords = (shape) => {
 };
 
 // создаёт ось
-const createCoordLine = (x, y, endX, endY, pointerLength) => {
+const createCoordLine = (x, y, vectorX, vectorY, pointerLength) => {
   const pointerWidth = 10;
   const color = "#000000";
   const strokeWidth = 4;
@@ -21,7 +22,7 @@ const createCoordLine = (x, y, endX, endY, pointerLength) => {
   return new Konva.Arrow({
     x: x,
     y: y,
-    points: [0, 0, endX, endY],
+    points: [0, 0, vectorX, vectorY],
     pointerLength: pointerLength,
     pointerWidth: pointerWidth,
     fill: color,
@@ -35,30 +36,54 @@ const createCoordLine = (x, y, endX, endY, pointerLength) => {
 // создаёт оси X и Y
 const addCoordLines = (background) => {
   const pointerLength = 10;
+  const halfOfCoordField = (backgroundHeight - marksSpawnHeight) / 2;
+  const halfOfCoordLineY = halfOfCoordField - pointerLength - 10;
+  const lengthOfCoordLineX = halfOfCoordLineY * 2 * 1.5;
+
+  // ось X
+  const xCoordLineX = (backgroundWidth - lengthOfCoordLineX) / 2;
+  const yCoordLineX = marksSpawnHeight + halfOfCoordField;
+  const vectorXCoordLineX = lengthOfCoordLineX;
+  const vectorYCoordLineX = 0;
   const coordLineX = createCoordLine(
-    0,
-    backgroundHeight / 2,
-    backgroundWidth - pointerLength / 2,
-    0,
+    xCoordLineX,
+    yCoordLineX,
+    vectorXCoordLineX,
+    vectorYCoordLineX,
     pointerLength
   );
+
+  // верхняя половина оси Y
+  const xCoordLineYup = backgroundWidth / 2;
+  const yCoordLineYup = marksSpawnHeight + halfOfCoordField;
+  const vectorXCoordLineYup = 0;
+  const vectorYCoordLineYup = -1 * halfOfCoordLineY;
   const coordLineYup = createCoordLine(
-    backgroundWidth / 2,
-    backgroundHeight / 2,
-    0,
-    -1 * (backgroundHeight / 2 - pointerLength / 2),
+    xCoordLineYup,
+    yCoordLineYup,
+    vectorXCoordLineYup,
+    vectorYCoordLineYup,
     pointerLength
   );
+
+  // нижняя половина оси Y
+  const xCoordLineYdown = backgroundWidth / 2;
+  const yCoordLineYdown = marksSpawnHeight + halfOfCoordField;
+  const vectorXCoordLineYdown = 0;
+  const vectorYCoordLineYdown = halfOfCoordLineY;
   const coordLineYdown = createCoordLine(
-    backgroundWidth / 2,
-    backgroundHeight / 2,
-    0,
-    backgroundHeight / 2 - pointerLength / 2,
+    xCoordLineYdown,
+    yCoordLineYdown,
+    vectorXCoordLineYdown,
+    vectorYCoordLineYdown,
     pointerLength
   );
+
   background.add(coordLineX);
   background.add(coordLineYup);
   background.add(coordLineYdown);
+
+  addCoordTexts(background, halfOfCoordField, lengthOfCoordLineX);
 };
 
 const createCoordText = (content, x, y, fontSize) => {
@@ -75,7 +100,7 @@ const createCoordText = (content, x, y, fontSize) => {
 };
 
 // создаёт текст на оси Y
-const addCoordTexts = (background) => {
+const addCoordTexts = (background, halfOfCoordField, lengthOfCoordLineX) => {
   const fontSize = 16;
 
   const upTextContent = TEXT_SIGNIFICANT;
@@ -85,13 +110,13 @@ const addCoordTexts = (background) => {
 
   // координаты начала текстов
   const upX = backgroundWidth / 2;
-  const upY = 0;
-  const rightX = backgroundWidth;
-  const rightY = backgroundHeight / 2;
+  const upY = marksSpawnHeight + 10;
+  const rightX = backgroundWidth - (backgroundWidth - lengthOfCoordLineX) / 2;
+  const rightY = marksSpawnHeight + halfOfCoordField;
   const downX = backgroundWidth / 2;
-  const downY = backgroundHeight;
-  const leftX = 0;
-  const leftY = backgroundHeight / 2;
+  const downY = backgroundHeight - 10;
+  const leftX = (backgroundWidth - lengthOfCoordLineX) / 2;
+  const leftY = marksSpawnHeight + halfOfCoordField;
 
   // создание текстов
   const upText = createCoordText(upTextContent, upX, upY, fontSize);
@@ -102,12 +127,11 @@ const addCoordTexts = (background) => {
   // сдвиг текстов вверх/вниз и вправо/влево
   upText.offsetX(-15);
   upText.offsetY(-5);
-  rightText.offsetX(rightText.width() + 5);
-  rightText.offsetY(rightText.height() + 10);
+  rightText.offsetX(rightText.width());
+  rightText.offsetY(rightText.height() + 14);
   downText.offsetX(-15);
   downText.offsetY(downText.height() + 5);
-  leftText.offsetX(-5);
-  leftText.offsetY(rightText.height() + 10);
+  leftText.offsetY(rightText.height() + 14);
 
   // добавление текстов на интерфейс
   background.add(upText);
@@ -116,23 +140,52 @@ const addCoordTexts = (background) => {
   background.add(leftText);
 };
 
-const addBackgroundColor = (background, color) => {
-  var backgroundColor = new Konva.Rect({
-    x: 0,
-    y: 0,
-    width: backgroundWidth,
-    height: backgroundHeight,
-    fill: color,
+const createMarksSpawnText = (marksSpawnWidth) => {
+  const x = 0;
+  const y = 15;
+  const text = new Konva.Text({
+    x: x,
+    y: y,
+    text: MARKS_SPAWN_TEXT,
+    fontSize: FONT_SIZE_LARGE,
+    fontFamily: FONT_FAMILY,
+    fill: TEXT_COLOR,
   });
-  background.add(backgroundColor);
+  text.offsetX(text.width() / 2)
+  return text;
+};
+
+const drawMarksSpawn = (backgroundLayer) => {
+  const marksSpawnWithText = new Konva.Group({
+    x: backgroundWidth / 2,
+    y: 0,
+  });
+
+  const marksSpawn = new Konva.Rect({
+    width: backgroundWidth / 2,
+    height: backgroundHeight / 5,
+    fill: MARKS_SPAWN_BACKGROUND_COLOR,
+    stroke: MARKS_SPAWN_STROKE_COLOR,
+    strokeWidth: 4,
+    cornerRadius: 10,
+  });
+  marksSpawn.offsetX(marksSpawn.width() / 2);
+  marksSpawn.offsetY(-5);
+
+  marksSpawnHeight = marksSpawn.height();
+
+  const text = createMarksSpawnText(marksSpawn.width());
+  marksSpawnWithText.add(marksSpawn);
+  marksSpawnWithText.add(text);
+  console.log(marksSpawnWithText)
+  backgroundLayer.add(marksSpawnWithText);
 };
 
 const drawBackground = (stage) => {
   const backgroundLayer = new Konva.Layer();
 
-  addBackgroundColor(backgroundLayer, "#c2c0ba30");
+  drawMarksSpawn(backgroundLayer);
   addCoordLines(backgroundLayer, stage);
-  addCoordTexts(backgroundLayer, stage);
 
   stage.add(backgroundLayer);
   backgroundLayer.draw();
@@ -166,9 +219,9 @@ const addMarkFigure = (markGroup) => {
 
 const addMarkText = (markGroup, textContent, markRadius) => {
   const textX = -50;
-  const fontSize = 14;
-  const textColor = "#000000";
-  const fontFamily = "Calibri";
+  const fontSize = FONT_SIZE_SMALL;
+  const textColor = TEXT_COLOR;
+  const fontFamily = FONT_FAMILY;
   const textWidth = 100;
   const textAlign = "center";
 
@@ -187,7 +240,7 @@ const addMarkText = (markGroup, textContent, markRadius) => {
   markGroup.add(text);
 };
 
-const addMark = (marksLayer, textContent) => {
+const addMark = (interactiveLayer, textContent) => {
   const markWithTextX = backgroundWidth - backgroundWidth / 5;
   const markWithTextY = backgroundHeight - backgroundHeight / 1.5;
 
@@ -206,19 +259,19 @@ const addMark = (marksLayer, textContent) => {
   //   document.getElementById("coordY").innerText = coords.y;
   // });
 
-  marksLayer.add(markWithText);
+  interactiveLayer.add(markWithText);
 };
 
 const drawMarks = (stage) => {
-  const marksLayer = new Konva.Layer();
-  stage.add(marksLayer);
+  const interactiveLayer = new Konva.Layer();
+  stage.add(interactiveLayer);
 
   addMark(
-    marksLayer,
+    interactiveLayer,
     "Эвакуация Ленинградского академического театра оперы и балета"
   );
 
-  marksLayer.draw();
+  interactiveLayer.draw();
 };
 
 // получает значения выбранных кнопок (radio buttons)
