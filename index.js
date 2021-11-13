@@ -38,7 +38,7 @@ const addCoordLines = (background) => {
   const pointerLength = 10;
   const halfOfCoordField = (backgroundHeight - marksSpawnHeight) / 2;
   const halfOfCoordLineY = halfOfCoordField - pointerLength - 10;
-  const lengthOfCoordLineX = halfOfCoordLineY * 2 * 1.5;
+  const lengthOfCoordLineX = backgroundWidth - pointerLength;
 
   // ось X
   const xCoordLineX = (backgroundWidth - lengthOfCoordLineX) / 2;

@@ -128,8 +128,13 @@ h3 {
 }
 
 #collective-memory-questionnaire {
-  width: 100%;
+  width: 700px;
   height: 700px;
+  margin: 0 auto 0 auto;
+}
+
+#place-mark-wrapper {
+  width: 700px;
   margin: 0 auto 0 auto;
 }
 
@@ -142,7 +147,6 @@ h3 {
      -moz-border-radius: 8px;
           border-radius: 8px;
   cursor: pointer;
-  margin-left: 138px;
 }
 
 #footer {

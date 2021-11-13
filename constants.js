@@ -8,7 +8,7 @@ const TEXT_UNSIGNIFICANT = "Незаметность";
 const TEXT_PRESENT = "Настоящее";
 const TEXT_PAST = "Прошлое";
 
-const BACKGROUND_WIDTH_INITIAL = 1000;
+const BACKGROUND_WIDTH_INITIAL = 800;
 const BACKGROUND_HEIGHT_INITIAL = 700;
 
 const MARKS_SPAWN_BACKGROUND_COLOR = "#c2c0ba30";
