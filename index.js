@@ -140,6 +140,58 @@ const addCoordTexts = (background, halfOfCoordField, lengthOfCoordLineX) => {
   background.add(leftText);
 };
 
+const textContent = "Какое-то шикарное и длинное событие";
+
+const createMarksSpawnEvent = (staticMarkColor, marksSpawnAreaWidth) => {
+  const event = new Konva.Group({
+    x: 0,
+    y: 0,
+  });
+
+  const radius = 4;
+  const staticMark = new Konva.Circle({
+    x: 0,
+    y: 0,
+    radius: radius,
+    fill: staticMarkColor,
+  });
+
+  const textX = radius * 4;
+  const textY = 0;
+  const textWidth = marksSpawnAreaWidth / 2.5;
+  const text = new Konva.Text({
+    x: textX,
+    y: textY,
+    text: textContent,
+    fontSize: FONT_SIZE_LARGE,
+    width: textWidth,
+    fontFamily: FONT_FAMILY,
+    fill: TEXT_COLOR,
+  });
+  text.offsetY(text.fontSize() / 2 - radius / 2);
+
+  let eventOffsetX;
+  if (staticMarkColor === "#ff0000") eventOffsetX = textWidth + 20;
+  else eventOffsetX = -20;
+  event.offsetX(eventOffsetX);
+
+  event.add(staticMark);
+  event.add(text);
+  return event;
+};
+
+const createMarksSpawnEvents = (marksSpawnAreaWidth) => {
+  const events = new Konva.Group({
+    x: 0,
+    y: marksSpawnHeight / 2,
+  });
+  const redEvent = createMarksSpawnEvent(COLORS.red, marksSpawnAreaWidth);
+  const blueEvent = createMarksSpawnEvent(COLORS.blue, marksSpawnAreaWidth);
+  events.add(redEvent);
+  events.add(blueEvent);
+  return events;
+};
+
 const createMarksSpawnText = () => {
   const x = 0;
   const y = 15;
@@ -151,17 +203,17 @@ const createMarksSpawnText = () => {
     fontFamily: FONT_FAMILY,
     fill: TEXT_COLOR,
   });
-  text.offsetX(text.width() / 2)
+  text.offsetX(text.width() / 2);
   return text;
 };
 
 const drawMarksSpawn = (backgroundLayer) => {
-  const marksSpawnWithText = new Konva.Group({
+  const marksSpawn = new Konva.Group({
     x: backgroundWidth / 2,
     y: 0,
   });
 
-  const marksSpawn = new Konva.Rect({
+  const marksSpawnArea = new Konva.Rect({
     width: backgroundWidth - 8,
     height: backgroundHeight / 5,
     fill: MARKS_SPAWN_BACKGROUND_COLOR,
@@ -169,16 +221,17 @@ const drawMarksSpawn = (backgroundLayer) => {
     strokeWidth: 4,
     cornerRadius: 10,
   });
-  marksSpawn.offsetX(marksSpawn.width() / 2);
-  marksSpawn.offsetY(-5);
+  marksSpawnArea.offsetX(marksSpawnArea.width() / 2);
+  marksSpawnArea.offsetY(-5);
 
-  marksSpawnHeight = marksSpawn.height();
+  marksSpawnHeight = marksSpawnArea.height();
 
-  const text = createMarksSpawnText(marksSpawn.width());
-  marksSpawnWithText.add(marksSpawn);
-  marksSpawnWithText.add(text);
-  console.log(marksSpawnWithText)
-  backgroundLayer.add(marksSpawnWithText);
+  const text = createMarksSpawnText(marksSpawnArea.width());
+  const events = createMarksSpawnEvents(marksSpawnArea.width());
+  marksSpawn.add(marksSpawnArea);
+  marksSpawn.add(text);
+  marksSpawn.add(events);
+  backgroundLayer.add(marksSpawn);
 };
 
 const drawBackground = (stage) => {

@@ -14,3 +14,8 @@ const BACKGROUND_HEIGHT_INITIAL = 700;
 const MARKS_SPAWN_BACKGROUND_COLOR = "#c2c0ba30";
 const MARKS_SPAWN_STROKE_COLOR = "#000000";
 const MARKS_SPAWN_TEXT = "Расположите два события:";
+
+const COLORS = {
+  red: "#ff0000",
+  blue: "#0000ff",
+};
