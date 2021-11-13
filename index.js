@@ -37,7 +37,7 @@ const createCoordLine = (x, y, vectorX, vectorY, pointerLength) => {
 const addCoordLines = (background) => {
   const pointerLength = 10;
   const halfOfCoordField = (backgroundHeight - marksSpawnHeight) / 2;
-  const halfOfCoordLineY = halfOfCoordField - pointerLength - 10;
+  const halfOfCoordLineY = halfOfCoordField - pointerLength - 15;
   const lengthOfCoordLineX = backgroundWidth - pointerLength;
 
   // ось X
@@ -110,11 +110,11 @@ const addCoordTexts = (background, halfOfCoordField, lengthOfCoordLineX) => {
 
   // координаты начала текстов
   const upX = backgroundWidth / 2;
-  const upY = marksSpawnHeight + 10;
+  const upY = marksSpawnHeight + 15;
   const rightX = backgroundWidth - (backgroundWidth - lengthOfCoordLineX) / 2;
   const rightY = marksSpawnHeight + halfOfCoordField;
   const downX = backgroundWidth / 2;
-  const downY = backgroundHeight - 10;
+  const downY = backgroundHeight - 15;
   const leftX = (backgroundWidth - lengthOfCoordLineX) / 2;
   const leftY = marksSpawnHeight + halfOfCoordField;
 
@@ -140,7 +140,7 @@ const addCoordTexts = (background, halfOfCoordField, lengthOfCoordLineX) => {
   background.add(leftText);
 };
 
-const createMarksSpawnText = (marksSpawnWidth) => {
+const createMarksSpawnText = () => {
   const x = 0;
   const y = 15;
   const text = new Konva.Text({
@@ -162,7 +162,7 @@ const drawMarksSpawn = (backgroundLayer) => {
   });
 
   const marksSpawn = new Konva.Rect({
-    width: backgroundWidth / 2,
+    width: backgroundWidth - 8,
     height: backgroundHeight / 5,
     fill: MARKS_SPAWN_BACKGROUND_COLOR,
     stroke: MARKS_SPAWN_STROKE_COLOR,
