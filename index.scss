@@ -130,6 +130,16 @@ h3 {
   margin: 0 auto 0 auto;
 }
 
+#place-mark {
+  padding: 8px 16px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #74bdb0;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: 138px;
+}
+
 #footer {
   padding: 40px 240px;
 }
@@ -137,8 +147,8 @@ h3 {
 #submit {
   display: block;
   margin: 0 auto 0 auto;
-  padding: 16px 32px;
   text-transform: uppercase;
+  padding: 16px 32px;
   border: 1px solid #000;
   border-radius: 50px;
   background-color: #f0f0f0;
