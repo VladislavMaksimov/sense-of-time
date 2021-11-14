@@ -206,8 +206,8 @@ const createMarksSpawnEvent = (
 const createMarksSpawnEvents = (marksSpawnAreaWidth) => {
   const currentEventsIndex = Number(localStorage.getItem("currentEventsIndex"));
   const eventNames = EVENTS[currentEventsIndex];
-  const firstEventName = eventNames.first;
-  const secondEventName = eventNames.second;
+  const firstEventName = eventNames.first.name;
+  const secondEventName = eventNames.second.name;
 
   const events = new Konva.Group({
     id: "events",
@@ -346,8 +346,10 @@ const addMark = (id, interactiveLayer, x, y, color, name) => {
 };
 
 const drawMarks = () => {
+  const currentIndex = Number(localStorage.getItem("currentEventsIndex"));
+
   addMark(
-    "first-mark",
+    String(EVENTS[currentIndex].first.id),
     interactiveLayer,
     redMarkCoords.x,
     redMarkCoords.y,
@@ -356,7 +358,7 @@ const drawMarks = () => {
   );
 
   addMark(
-    "second-mark",
+    String(EVENTS[currentIndex].second.id),
     interactiveLayer,
     blueMarkCoords.x,
     blueMarkCoords.y,
@@ -403,26 +405,32 @@ const disablePlaceMarksButton = () => {
 const placeMarks = () => {
   if (!marksSpawnArea) return;
 
-  const firstMarkY = stage.findOne("#first-mark").absolutePosition().y;
-  const secondMarkY = stage.findOne("#second-mark").absolutePosition().y;
-
+  const currentIndex = Number(localStorage.getItem("currentEventsIndex"));
+  
+  const firstMarkY = stage
+    .findOne("#" + EVENTS[currentIndex].first.id)
+    .absolutePosition().y;
+  const secondMarkY = stage
+    .findOne("#" + EVENTS[currentIndex].second.id)
+    .absolutePosition().y;
   if (firstMarkY < marksSpawnHeight || secondMarkY < marksSpawnHeight) {
     alert(ALERT_TEXT_MARKS_NOT_IN_AREA);
     return;
   }
 
   try {
-    const newIndex = Number(localStorage.getItem("currentEventsIndex")) + 1;
+    const newIndex = currentIndex + 1;
 
     if (newIndex >= EVENTS.length) {
       disablePlaceMarksButton();
       return;
     }
 
-    stage.findOne("#first-event").text(EVENTS[newIndex].first);
-    stage.findOne("#second-event").text(EVENTS[newIndex].second);
+    stage.findOne("#first-event").text(EVENTS[newIndex].first.name);
+    stage.findOne("#second-event").text(EVENTS[newIndex].second.name);
 
     localStorage.setItem("currentEventsIndex", newIndex);
+    drawMarks();
   } catch (e) {
     if (e instanceof TypeError) alert(ALERT_TEXT_OUT_OF_EVENTS);
     else alert(ALERT_TEXT_UNKNOWN);
