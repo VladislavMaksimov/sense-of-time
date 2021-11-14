@@ -259,7 +259,33 @@ const drawBackground = (stage) => {
   backgroundLayer.draw();
 };
 
-const addMark = (interactiveLayer, x, y, color) => {
+const restrictMovementYup = (mark) => {
+  const y = mark.absolutePosition().y;
+  if (y <= marksSpawnHeight + 8 + 15) mark.y(marksSpawnHeight + 8 + 15);
+};
+
+const restrictMovement = (mark) => {
+  const markPosition = mark.absolutePosition();
+  const x = markPosition.x;
+  const y = markPosition.y;
+  if (x <= 0) mark.x(0);
+  else if (x >= backgroundWidth) mark.x(backgroundWidth);
+  if (y >= backgroundHeight - 20) mark.y(backgroundHeight - 20);
+  if (
+    y >= marksSpawnHeight + 8 + 15 &&
+    JSON.parse(localStorage.getItem(mark.name())).hitCoordArea === "false"
+  ) {
+    localStorage.setItem(
+      mark.name(),
+      JSON.stringify({
+        hitCoordArea: "true",
+      })
+    );
+    mark.on("dragmove", () => restrictMovementYup(mark));
+  }
+};
+
+const addMark = (interactiveLayer, x, y, color, name) => {
   // markWithText.addEventListener("dragend", (e) => {
   //   const coords = translateCoords(markWithText);
   //   document.getElementById("coordX").innerText = coords.x;
@@ -271,14 +297,23 @@ const addMark = (interactiveLayer, x, y, color) => {
   const markRotation = -1 * (90 + markAngle / 2);
 
   const mark = new Konva.Wedge({
+    name: name,
     x: x,
     y: y,
     radius: markRadius,
     angle: markAngle,
     fill: color,
     rotation: markRotation,
-    draggable: true
+    draggable: true,
   });
+  localStorage.setItem(
+    name,
+    JSON.stringify({
+      hitCoordArea: "false",
+    })
+  );
+
+  mark.on("dragmove", () => restrictMovement(mark));
 
   interactiveLayer.add(mark);
 };
@@ -287,18 +322,14 @@ const drawMarks = (stage) => {
   const interactiveLayer = new Konva.Layer();
   stage.add(interactiveLayer);
 
-  addMark(
-    interactiveLayer,
-    redMarkCoords.x,
-    redMarkCoords.y,
-    "#ff0000"
-  );
+  addMark(interactiveLayer, redMarkCoords.x, redMarkCoords.y, "#ff0000", "red");
 
   addMark(
     interactiveLayer,
     blueMarkCoords.x,
     blueMarkCoords.y,
-    "#0000ff"
+    "#0000ff",
+    "blue"
   );
 
   interactiveLayer.draw();
