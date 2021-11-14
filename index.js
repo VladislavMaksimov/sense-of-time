@@ -182,11 +182,11 @@ const createMarksSpawnEvent = (staticMarkColor, marksSpawnAreaWidth) => {
   if (staticMarkColor === "#ff0000") {
     eventOffsetX = textWidth + 20;
     redMarkCoords.x = marksSpawnAreaWidth / 2 - eventOffsetX + radius;
-    redMarkCoords.y = marksSpawnHeight / 2 + 4 * radius;
+    redMarkCoords.y = marksSpawnHeight / 2 + 5 + 4 * radius;
   } else {
     eventOffsetX = -20;
     blueMarkCoords.x = marksSpawnAreaWidth / 2 + 20 + radius;
-    blueMarkCoords.y = marksSpawnHeight / 2 + 4 * radius;
+    blueMarkCoords.y = marksSpawnHeight / 2 + 5 + 4 * radius;
   }
   event.offsetX(eventOffsetX);
 
@@ -198,7 +198,7 @@ const createMarksSpawnEvent = (staticMarkColor, marksSpawnAreaWidth) => {
 const createMarksSpawnEvents = (marksSpawnAreaWidth) => {
   const events = new Konva.Group({
     x: 0,
-    y: marksSpawnHeight / 2,
+    y: marksSpawnHeight / 2 + 5,
   });
   const redEvent = createMarksSpawnEvent(COLORS.red, marksSpawnAreaWidth);
   const blueEvent = createMarksSpawnEvent(COLORS.blue, marksSpawnAreaWidth);
@@ -209,7 +209,7 @@ const createMarksSpawnEvents = (marksSpawnAreaWidth) => {
 
 const createMarksSpawnText = () => {
   const x = 0;
-  const y = 15;
+  const y = 25;
   const text = new Konva.Text({
     x: x,
     y: y,
