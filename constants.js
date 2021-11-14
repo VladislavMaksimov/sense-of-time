@@ -59,3 +59,7 @@ const EVENTS = [
     second: "Губернаторство Игумнова/Трутнев",
   },
 ];
+
+const ALERT_TEXT_OUT_OF_EVENTS = "События закончились!";
+const ALERT_TEXT_UNKNOWN =
+  "Возникла неизвестная ошибка! Пожалуйста, сообщите нам о ней!";

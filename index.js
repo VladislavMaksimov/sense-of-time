@@ -1,6 +1,10 @@
+let stage = null;
+let interactiveLayer = null;
+let marksSpawnArea = null;
 let backgroundWidth = BACKGROUND_WIDTH_INITIAL;
 let backgroundHeight = BACKGROUND_HEIGHT_INITIAL;
 let marksSpawnHeight = BACKGROUND_HEIGHT_INITIAL / 5;
+localStorage.setItem("currentEventsIndex", "0");
 
 const redMarkCoords = {
   x: null,
@@ -149,9 +153,12 @@ const addCoordTexts = (background, halfOfCoordField, lengthOfCoordLineX) => {
   background.add(leftText);
 };
 
-const textContent = "Какое-то шикарное и длинное событие";
-
-const createMarksSpawnEvent = (staticMarkColor, marksSpawnAreaWidth) => {
+const createMarksSpawnEvent = (
+  id,
+  staticMarkColor,
+  marksSpawnAreaWidth,
+  name
+) => {
   const event = new Konva.Group({
     x: 0,
     y: 0,
@@ -169,9 +176,10 @@ const createMarksSpawnEvent = (staticMarkColor, marksSpawnAreaWidth) => {
   const textY = 0;
   const textWidth = marksSpawnAreaWidth / 2.5;
   const text = new Konva.Text({
+    id: id,
     x: textX,
     y: textY,
-    text: textContent,
+    text: name,
     fontSize: FONT_SIZE_LARGE,
     width: textWidth,
     fontFamily: FONT_FAMILY,
@@ -196,14 +204,32 @@ const createMarksSpawnEvent = (staticMarkColor, marksSpawnAreaWidth) => {
 };
 
 const createMarksSpawnEvents = (marksSpawnAreaWidth) => {
+  const currentEventsIndex = Number(localStorage.getItem("currentEventsIndex"));
+  const eventNames = EVENTS[currentEventsIndex];
+  const firstEventName = eventNames.first;
+  const secondEventName = eventNames.second;
+
   const events = new Konva.Group({
+    id: "events",
     x: 0,
     y: marksSpawnHeight / 2 + 5,
   });
-  const redEvent = createMarksSpawnEvent(COLORS.red, marksSpawnAreaWidth);
-  const blueEvent = createMarksSpawnEvent(COLORS.blue, marksSpawnAreaWidth);
-  events.add(redEvent);
-  events.add(blueEvent);
+
+  const firstEvent = createMarksSpawnEvent(
+    "first-event",
+    COLORS.red,
+    marksSpawnAreaWidth,
+    firstEventName
+  );
+  const secondEvent = createMarksSpawnEvent(
+    "second-event",
+    COLORS.blue,
+    marksSpawnAreaWidth,
+    secondEventName
+  );
+
+  events.add(firstEvent);
+  events.add(secondEvent);
   return events;
 };
 
@@ -228,7 +254,7 @@ const drawMarksSpawn = (backgroundLayer) => {
     y: 0,
   });
 
-  const marksSpawnArea = new Konva.Rect({
+  marksSpawnArea = new Konva.Rect({
     width: backgroundWidth - 8,
     height: backgroundHeight / 5,
     fill: MARKS_SPAWN_BACKGROUND_COLOR,
@@ -318,10 +344,7 @@ const addMark = (interactiveLayer, x, y, color, name) => {
   interactiveLayer.add(mark);
 };
 
-const drawMarks = (stage) => {
-  const interactiveLayer = new Konva.Layer();
-  stage.add(interactiveLayer);
-
+const drawMarks = () => {
   addMark(interactiveLayer, redMarkCoords.x, redMarkCoords.y, "#ff0000", "red");
 
   addMark(
@@ -359,6 +382,32 @@ const getActivities = () => {
   return activities;
 };
 
+const disablePlaceMarksButton = () => {
+  const placeMarksButton = document.getElementById("place-marks");
+  placeMarksButton.removeEventListener("click", placeMarks);
+  placeMarksButton.remove();
+
+  const eventsGroup = stage.findOne("#events");
+  eventsGroup.destroy();
+};
+
+const placeMarks = () => {
+  if (!marksSpawnArea) return;
+  try {
+    const newIndex = Number(localStorage.getItem("currentEventsIndex")) + 1;
+    if (newIndex >= EVENTS.length) {
+      disablePlaceMarksButton();
+      return;
+    }
+    stage.findOne("#first-event").text(EVENTS[newIndex].first);
+    stage.findOne("#second-event").text(EVENTS[newIndex].second);
+    localStorage.setItem("currentEventsIndex", newIndex);
+  } catch (e) {
+    if (e instanceof TypeError) alert(ALERT_TEXT_OUT_OF_EVENTS);
+    else alert(ALERT_TEXT_UNKNOWN);
+  }
+};
+
 // отправляет результаты опроса на сервер
 const submitAnswers = () => {
   const gender = getCheckedRadio("gender");
@@ -387,14 +436,21 @@ window.addEventListener("load", () => {
   backgroundWidth = collectiveMemoryQuestionnaire.offsetWidth;
   backgroundHeight = collectiveMemoryQuestionnaire.offsetHeight;
 
-  const stage = new Konva.Stage({
+  stage = new Konva.Stage({
     container: "collective-memory-questionnaire",
     width: backgroundWidth,
     height: backgroundHeight,
   });
 
   drawBackground(stage);
-  drawMarks(stage);
+
+  interactiveLayer = new Konva.Layer();
+  stage.add(interactiveLayer);
+
+  drawMarks();
+
+  const placeMarksButton = document.getElementById("place-marks");
+  placeMarksButton.addEventListener("click", placeMarks);
 
   const submit = document.getElementById("submit");
   submit.addEventListener("click", submitAnswers);
