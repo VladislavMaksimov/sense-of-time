@@ -311,7 +311,7 @@ const restrictMovement = (mark) => {
   }
 };
 
-const addMark = (interactiveLayer, x, y, color, name) => {
+const addMark = (id, interactiveLayer, x, y, color, name) => {
   // markWithText.addEventListener("dragend", (e) => {
   //   const coords = translateCoords(markWithText);
   //   document.getElementById("coordX").innerText = coords.x;
@@ -323,6 +323,7 @@ const addMark = (interactiveLayer, x, y, color, name) => {
   const markRotation = -1 * (90 + markAngle / 2);
 
   const mark = new Konva.Wedge({
+    id: id,
     name: name,
     x: x,
     y: y,
@@ -345,9 +346,17 @@ const addMark = (interactiveLayer, x, y, color, name) => {
 };
 
 const drawMarks = () => {
-  addMark(interactiveLayer, redMarkCoords.x, redMarkCoords.y, "#ff0000", "red");
+  addMark(
+    "first-mark",
+    interactiveLayer,
+    redMarkCoords.x,
+    redMarkCoords.y,
+    "#ff0000",
+    "red"
+  );
 
   addMark(
+    "second-mark",
     interactiveLayer,
     blueMarkCoords.x,
     blueMarkCoords.y,
@@ -393,14 +402,26 @@ const disablePlaceMarksButton = () => {
 
 const placeMarks = () => {
   if (!marksSpawnArea) return;
+
+  const firstMarkY = stage.findOne("#first-mark").absolutePosition().y;
+  const secondMarkY = stage.findOne("#second-mark").absolutePosition().y;
+
+  if (firstMarkY < marksSpawnHeight || secondMarkY < marksSpawnHeight) {
+    alert(ALERT_TEXT_MARKS_NOT_IN_AREA);
+    return;
+  }
+
   try {
     const newIndex = Number(localStorage.getItem("currentEventsIndex")) + 1;
+
     if (newIndex >= EVENTS.length) {
       disablePlaceMarksButton();
       return;
     }
+
     stage.findOne("#first-event").text(EVENTS[newIndex].first);
     stage.findOne("#second-event").text(EVENTS[newIndex].second);
+
     localStorage.setItem("currentEventsIndex", newIndex);
   } catch (e) {
     if (e instanceof TypeError) alert(ALERT_TEXT_OUT_OF_EVENTS);

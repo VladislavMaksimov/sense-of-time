@@ -63,3 +63,4 @@ const EVENTS = [
 const ALERT_TEXT_OUT_OF_EVENTS = "События закончились!";
 const ALERT_TEXT_UNKNOWN =
   "Возникла неизвестная ошибка! Пожалуйста, сообщите нам о ней!";
+const ALERT_TEXT_MARKS_NOT_IN_AREA = "Пожалуйста, поместите обе метки на поле.";
