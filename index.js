@@ -1,5 +1,7 @@
 let stage = null;
-let interactiveLayer = null;
+let interactiveLayer = new Konva.Layer();
+let tooltipLayer = new Konva.Layer();
+let tooltip = null;
 let marksSpawnArea = null;
 let backgroundWidth = BACKGROUND_WIDTH_INITIAL;
 let backgroundHeight = BACKGROUND_HEIGHT_INITIAL;
@@ -183,7 +185,7 @@ const createMarksSpawnEvent = (
     fontSize: FONT_SIZE_LARGE,
     width: textWidth,
     fontFamily: FONT_FAMILY,
-    fill: TEXT_COLOR,
+    fill: COLORS.text,
   });
   text.offsetY(text.fontSize() / 2 - radius / 2);
 
@@ -242,7 +244,7 @@ const createMarksSpawnText = () => {
     text: MARKS_SPAWN_TEXT,
     fontSize: FONT_SIZE_LARGE,
     fontFamily: FONT_FAMILY,
-    fill: TEXT_COLOR,
+    fill: COLORS.text,
   });
   text.offsetX(text.width() / 2);
   return text;
@@ -257,8 +259,8 @@ const drawMarksSpawn = (backgroundLayer) => {
   marksSpawnArea = new Konva.Rect({
     width: backgroundWidth - 8,
     height: backgroundHeight / 5,
-    fill: MARKS_SPAWN_BACKGROUND_COLOR,
-    stroke: MARKS_SPAWN_STROKE_COLOR,
+    fill: COLORS.marksSpawnBackground,
+    stroke: COLORS.marksSpawnStroke,
     strokeWidth: 4,
     cornerRadius: 10,
   });
@@ -402,21 +404,47 @@ const disablePlaceMarksButton = () => {
   eventsGroup.destroy();
 };
 
+const showTooltip = (text, mark) => {
+  tooltip.text(text);
+  const x = mark.x() - tooltip.width() / 2;
+  const y = mark.y() - mark.height() / 2 - tooltip.height();
+  tooltip.x(x);
+  tooltip.y(y);
+  tooltip.show();
+};
+
+const hideTooltip = () => {
+  tooltip.hide();
+};
+
 const placeMarks = () => {
   if (!marksSpawnArea) return;
 
   const currentIndex = Number(localStorage.getItem("currentEventsIndex"));
-  
-  const firstMarkY = stage
-    .findOne("#" + EVENTS[currentIndex].first.id)
-    .absolutePosition().y;
-  const secondMarkY = stage
-    .findOne("#" + EVENTS[currentIndex].second.id)
-    .absolutePosition().y;
+
+  const firstMark = stage.findOne("#" + EVENTS[currentIndex].first.id);
+  const secondMark = stage.findOne("#" + EVENTS[currentIndex].second.id);
+  const firstMarkY = firstMark.absolutePosition().y;
+  const secondMarkY = secondMark.absolutePosition().y;
+  const firstEvent = stage.findOne("#first-event");
+  const secondEvent = stage.findOne("#second-event");
+
   if (firstMarkY < marksSpawnHeight || secondMarkY < marksSpawnHeight) {
     alert(ALERT_TEXT_MARKS_NOT_IN_AREA);
     return;
   }
+
+  firstMark.draggable(false);
+  firstMark.fill("#787878");
+  const firstEventText = firstEvent.text();
+  firstMark.on("mouseenter", () => showTooltip(firstEventText, firstMark));
+  firstMark.on("mouseout", () => hideTooltip());
+
+  secondMark.draggable(false);
+  secondMark.fill("#787878");
+  const secondEventText = secondEvent.text();
+  secondMark.on("mouseenter", () => showTooltip(secondEventText, secondMark));
+  secondMark.on("mouseout", () => hideTooltip());
 
   try {
     const newIndex = currentIndex + 1;
@@ -426,8 +454,8 @@ const placeMarks = () => {
       return;
     }
 
-    stage.findOne("#first-event").text(EVENTS[newIndex].first.name);
-    stage.findOne("#second-event").text(EVENTS[newIndex].second.name);
+    firstEvent.text(EVENTS[newIndex].first.name);
+    secondEvent.text(EVENTS[newIndex].second.name);
 
     localStorage.setItem("currentEventsIndex", newIndex);
     drawMarks();
@@ -458,6 +486,25 @@ const submitAnswers = () => {
   console.log(data);
 };
 
+const createTooltip = () => {
+  tooltip = new Konva.Text({
+    id: TOOLTIP_ID,
+    visible: false,
+    x: 0,
+    y: 0,
+    width: TOOLTIP_WIDTH,
+    align: TOOLTIP_TEXT_ALIGN,
+    fill: COLORS.text,
+    fontFamily: FONT_FAMILY,
+    fontSize: FONT_SIZE_LARGE,
+    text: "",
+    strokeWidth: TOOLTIP_STROKE_WIDTH,
+    stroke: COLORS.tooltip,
+    fillAfterStrokeEnabled: true,
+  });
+  return tooltip;
+};
+
 window.addEventListener("load", () => {
   const collectiveMemoryQuestionnaire = document.getElementById(
     "collective-memory-questionnaire"
@@ -473,8 +520,11 @@ window.addEventListener("load", () => {
 
   drawBackground(stage);
 
-  interactiveLayer = new Konva.Layer();
+  tooltip = createTooltip();
+  tooltipLayer.add(tooltip);
+
   stage.add(interactiveLayer);
+  stage.add(tooltipLayer);
 
   drawMarks();
 

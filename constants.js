@@ -1,7 +1,6 @@
 const FONT_SIZE_SMALL = 14;
 const FONT_SIZE_LARGE = 20;
 const FONT_FAMILY = "Calibri";
-const TEXT_COLOR = "#000000";
 
 const TEXT_SIGNIFICANT = "Заметность";
 const TEXT_UNSIGNIFICANT = "Незаметность";
@@ -11,14 +10,26 @@ const TEXT_PAST = "Прошлое";
 const BACKGROUND_WIDTH_INITIAL = 800;
 const BACKGROUND_HEIGHT_INITIAL = 700;
 
-const MARKS_SPAWN_BACKGROUND_COLOR = "#c2c0ba30";
-const MARKS_SPAWN_STROKE_COLOR = "#000000";
 const MARKS_SPAWN_TEXT = "Расположите два события:";
 
 const COLORS = {
   red: "#ff0000",
   blue: "#0000ff",
+  tooltip: "#f0f0f0",
+  text: "#000000",
+  marksSpawnBackground: "#c2c0ba30",
+  marksSpawnStroke: "#000000",
 };
+
+const ALERT_TEXT_OUT_OF_EVENTS = "События закончились!";
+const ALERT_TEXT_UNKNOWN =
+  "Возникла неизвестная ошибка! Пожалуйста, сообщите нам о ней!";
+const ALERT_TEXT_MARKS_NOT_IN_AREA = "Пожалуйста, поместите обе метки на поле.";
+
+const TOOLTIP_ID = "tooltip";
+const TOOLTIP_WIDTH = 400;
+const TOOLTIP_STROKE_WIDTH = 3;
+const TOOLTIP_TEXT_ALIGN = "center";
 
 const EVENTS = [
   {
@@ -112,8 +123,3 @@ const EVENTS = [
     },
   },
 ];
-
-const ALERT_TEXT_OUT_OF_EVENTS = "События закончились!";
-const ALERT_TEXT_UNKNOWN =
-  "Возникла неизвестная ошибка! Пожалуйста, сообщите нам о ней!";
-const ALERT_TEXT_MARKS_NOT_IN_AREA = "Пожалуйста, поместите обе метки на поле.";
