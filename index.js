@@ -406,7 +406,17 @@ const disablePlaceMarksButton = () => {
 
 const showTooltip = (text, mark) => {
   tooltip.text(text);
-  const x = mark.x() - tooltip.width() / 2;
+  let x = mark.x() - tooltip.width() / 2;
+  // проверка, не выходил ли текст подсказки за пределы поля с графиком
+  if (x <= 0) {
+    // если выходит слева, ставим подсказку правее метки
+    tooltip.align("left");
+    x = mark.x() + 15;
+  } else if (x + tooltip.width() >= backgroundWidth) {
+    // если справа - левее метки
+    tooltip.align("right");
+    x = mark.x() - tooltip.width() - 15;
+  } else tooltip.align(TOOLTIP_TEXT_ALIGN);
   const y = mark.y() - mark.height() / 2 - tooltip.height();
   tooltip.x(x);
   tooltip.y(y);
