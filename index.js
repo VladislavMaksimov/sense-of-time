@@ -453,8 +453,14 @@ const placeMarks = () => {
   secondMark.draggable(false);
   secondMark.fill("#787878");
   const secondEventText = secondEvent.text();
+
+  // показывает подсказку при наведении мыши на метку
   secondMark.on("mouseenter", () => showTooltip(secondEventText, secondMark));
   secondMark.on("mouseout", () => hideTooltip());
+
+  // показывает подсказку при нажатии на метку со смартфона
+  secondMark.on("touchstart", () => showTooltip(secondEventText, secondMark));
+  secondMark.on("touchend", () => hideTooltip());
 
   try {
     const newIndex = currentIndex + 1;
