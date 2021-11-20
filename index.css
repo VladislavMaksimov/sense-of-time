@@ -17,6 +17,7 @@ body {
   font-family: "Myriad Pro Regular", Arial, Helvetica, sans-serif;
   font-size: 18px;
   line-height: 24px;
+  min-width: 768px;
 }
 
 h1 {
