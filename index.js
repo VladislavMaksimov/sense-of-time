@@ -533,17 +533,21 @@ const createTooltip = () => {
   return tooltip;
 };
 
+const changeMarkRadius = (id, newRadius) => {
+  const mark = stage.findOne("#" + id);
+  mark.radius(newRadius);
+};
+
 const changeMarksRadius = () => {
   const newRadius = getMarkRadius();
   const currentIndex = Number(localStorage.getItem("currentEventsIndex"));
-
-  const firstMark = stage.findOne("#" + String(EVENTS[currentIndex].first.id));
-  firstMark.radius(newRadius);
-
-  const secondMark = stage.findOne(
-    "#" + String(EVENTS[currentIndex].second.id)
-  );
-  secondMark.radius(newRadius);
+  for (let i = 0; i <= currentIndex; i++) {
+    console.log(EVENTS[i])
+    const firstMarkId = String(EVENTS[i].first.id);
+    changeMarkRadius(firstMarkId, newRadius);
+    const secondMarkId = String(EVENTS[i].second.id);
+    changeMarkRadius(secondMarkId, newRadius);
+  }
 };
 
 window.addEventListener("load", () => {
