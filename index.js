@@ -1,3 +1,5 @@
+Konva.pixelRatio = 2;
+
 let stage = null;
 let interactiveLayer = new Konva.Layer();
 let tooltipLayer = new Konva.Layer();
@@ -155,6 +157,12 @@ const addCoordTexts = (background, halfOfCoordField, lengthOfCoordLineX) => {
   background.add(leftText);
 };
 
+const getEventFontSize = () => {
+  if (window.screen.width < 768) {
+    return FONT_SIZE_AVERAGE;
+  } else return FONT_SIZE_LARGE;
+};
+
 const createMarksSpawnEvent = (
   id,
   staticMarkColor,
@@ -177,12 +185,14 @@ const createMarksSpawnEvent = (
   const textX = radius * 4;
   const textY = 0;
   const textWidth = marksSpawnAreaWidth / 2.5;
+  const fontSize = getEventFontSize();
+
   const text = new Konva.Text({
     id: id,
     x: textX,
     y: textY,
     text: name,
-    fontSize: FONT_SIZE_LARGE,
+    fontSize: fontSize,
     width: textWidth,
     fontFamily: FONT_FAMILY,
     fill: COLORS.text,
@@ -238,6 +248,7 @@ const createMarksSpawnEvents = (marksSpawnAreaWidth) => {
 const createMarksSpawnText = () => {
   const x = 0;
   const y = 25;
+
   const text = new Konva.Text({
     x: x,
     y: y,
@@ -313,6 +324,12 @@ const restrictMovement = (mark) => {
   }
 };
 
+const getMarkRadius = () => {
+  if (window.screen.width < 480) return 35;
+  else if (window.screen.width < 768) return 30;
+  else return 25;
+};
+
 const addMark = (id, interactiveLayer, x, y, color, name) => {
   // markWithText.addEventListener("dragend", (e) => {
   //   const coords = translateCoords(markWithText);
@@ -320,7 +337,7 @@ const addMark = (id, interactiveLayer, x, y, color, name) => {
   //   document.getElementById("coordY").innerText = coords.y;
   // });
 
-  const markRadius = 25;
+  const markRadius = getMarkRadius();
   const markAngle = 60;
   const markRotation = -1 * (90 + markAngle / 2);
 
@@ -447,14 +464,26 @@ const placeMarks = () => {
   firstMark.draggable(false);
   firstMark.fill("#787878");
   const firstEventText = firstEvent.text();
+
+  // показывает подсказку при наведении мыши на метку
   firstMark.on("mouseenter", () => showTooltip(firstEventText, firstMark));
   firstMark.on("mouseout", () => hideTooltip());
+
+  // показывает подсказку при нажатии на метку со смартфона
+  firstMark.on("touchstart", () => showTooltip(firstEventText, firstMark));
+  firstMark.on("touchend", () => hideTooltip());
 
   secondMark.draggable(false);
   secondMark.fill("#787878");
   const secondEventText = secondEvent.text();
+
+  // показывает подсказку при наведении мыши на метку
   secondMark.on("mouseenter", () => showTooltip(secondEventText, secondMark));
   secondMark.on("mouseout", () => hideTooltip());
+
+  // показывает подсказку при нажатии на метку со смартфона
+  secondMark.on("touchstart", () => showTooltip(secondEventText, secondMark));
+  secondMark.on("touchend", () => hideTooltip());
 
   try {
     const newIndex = currentIndex + 1;
@@ -515,6 +544,30 @@ const createTooltip = () => {
   return tooltip;
 };
 
+const changeMarkRadius = (id, newRadius) => {
+  const mark = stage.findOne("#" + id);
+  mark.radius(newRadius);
+};
+
+const changeMarksRadius = () => {
+  const newRadius = getMarkRadius();
+  const currentIndex = Number(localStorage.getItem("currentEventsIndex"));
+  for (let i = 0; i <= currentIndex; i++) {
+    const firstMarkId = String(EVENTS[i].first.id);
+    changeMarkRadius(firstMarkId, newRadius);
+    const secondMarkId = String(EVENTS[i].second.id);
+    changeMarkRadius(secondMarkId, newRadius);
+  }
+};
+
+const changeEventsFontSize = () => {
+  const fontSize = getEventFontSize();
+  const firstEvent = stage.findOne("#first-event");
+  const secondEvent = stage.findOne("#second-event");
+  firstEvent.fontSize(fontSize);
+  secondEvent.fontSize(fontSize);
+};
+
 window.addEventListener("load", () => {
   const collectiveMemoryQuestionnaire = document.getElementById(
     "collective-memory-questionnaire"
@@ -543,4 +596,7 @@ window.addEventListener("load", () => {
 
   const submit = document.getElementById("submit");
   submit.addEventListener("click", submitAnswers);
+
+  window.addEventListener("resize", changeMarksRadius);
+  window.addEventListener("resize", changeEventsFontSize);
 });
