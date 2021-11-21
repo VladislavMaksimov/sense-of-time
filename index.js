@@ -1,4 +1,3 @@
-alert(window.devicePixelRatio);
 Konva.pixelRatio = 2;
 
 let stage = null;
@@ -158,6 +157,12 @@ const addCoordTexts = (background, halfOfCoordField, lengthOfCoordLineX) => {
   background.add(leftText);
 };
 
+const getEventFontSize = () => {
+  if (window.screen.width < 768) {
+    return FONT_SIZE_AVERAGE;
+  } else return FONT_SIZE_LARGE;
+};
+
 const createMarksSpawnEvent = (
   id,
   staticMarkColor,
@@ -180,12 +185,14 @@ const createMarksSpawnEvent = (
   const textX = radius * 4;
   const textY = 0;
   const textWidth = marksSpawnAreaWidth / 2.5;
+  const fontSize = getEventFontSize();
+
   const text = new Konva.Text({
     id: id,
     x: textX,
     y: textY,
     text: name,
-    fontSize: FONT_SIZE_LARGE,
+    fontSize: fontSize,
     width: textWidth,
     fontFamily: FONT_FAMILY,
     fill: COLORS.text,
@@ -241,6 +248,7 @@ const createMarksSpawnEvents = (marksSpawnAreaWidth) => {
 const createMarksSpawnText = () => {
   const x = 0;
   const y = 25;
+
   const text = new Konva.Text({
     x: x,
     y: y,
@@ -552,6 +560,14 @@ const changeMarksRadius = () => {
   }
 };
 
+const changeEventsFontSize = () => {
+  const fontSize = getEventFontSize();
+  const firstEvent = stage.findOne("#first-event");
+  const secondEvent = stage.findOne("#second-event");
+  firstEvent.fontSize(fontSize);
+  secondEvent.fontSize(fontSize);
+};
+
 window.addEventListener("load", () => {
   const collectiveMemoryQuestionnaire = document.getElementById(
     "collective-memory-questionnaire"
@@ -582,4 +598,5 @@ window.addEventListener("load", () => {
   submit.addEventListener("click", submitAnswers);
 
   window.addEventListener("resize", changeMarksRadius);
+  window.addEventListener("resize", changeEventsFontSize);
 });
