@@ -126,7 +126,13 @@ h3 {
 }
 
 #activities #activities-first-row > td {
+  text-align: center;
   padding-top: 0px;
+}
+
+.activities-item .custom-radio {
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #activities #activities-last-row > td {
@@ -183,9 +189,61 @@ h3 {
 input[type="text"],
 input[type="number"] {
   padding: 6px 12px;
-  border: 1px solid #636363;
+  border: 1px solid #1f1d1d;
   border-radius: 4px;
   font-size: 16px;
+}
+
+.radio-container {
+  position: relative;
+  cursor: pointer;
+  padding-left: 20px;
+  vertical-align: middle;
+}
+
+.radio-container > input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-container:hover input ~ .custom-radio {
+  background-color: #aaa;
+}
+
+.custom-radio:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.radio-container input:checked ~ .custom-radio:after {
+  display: block;
+}
+
+.radio-container .custom-radio:after {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.custom-radio {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: #bbb;
+  border-radius: 50%;
+}
+
+.custom-radio.radio-without-label {
+  padding: 0;
 }
 
 @media only screen and (max-width: 1200px) {
