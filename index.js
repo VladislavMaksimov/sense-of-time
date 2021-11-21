@@ -1,3 +1,4 @@
+alert(window.devicePixelRatio);
 Konva.pixelRatio = 2;
 
 let stage = null;
