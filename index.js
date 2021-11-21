@@ -1,3 +1,5 @@
+Konva.pixelRatio = 2;
+
 let stage = null;
 let interactiveLayer = new Konva.Layer();
 let tooltipLayer = new Konva.Layer();
@@ -187,8 +189,6 @@ const createMarksSpawnEvent = (
     fontFamily: FONT_FAMILY,
     fill: COLORS.text,
   });
-  alert(text.width());
-  alert(text.fontSize());
   text.offsetY(text.fontSize() / 2 - radius / 2);
 
   if (staticMarkColor === "#ff0000") {
