@@ -162,7 +162,7 @@ h3 {
 }
 
 #footer {
-  padding: 40px 240px;
+  padding: 40px 20%;
 }
 
 #submit {
@@ -212,21 +212,24 @@ input[type="number"] {
 
 @media only screen and (max-width: 1024px) {
   #header,
-  #main {
+  #main,
+  #footer {
     padding: 40px 10%;
   }
 }
 
 @media only screen and (max-width: 960px) {
   #header,
-  #main {
+  #main,
+  #footer {
     padding: 40px 5%;
   }
 }
 
 @media only screen and (max-width: 768px) {
   #header,
-  #main {
+  #main,
+  #footer {
     padding: 40px 10px;
   }
 }
