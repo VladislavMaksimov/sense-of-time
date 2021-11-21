@@ -313,6 +313,12 @@ const restrictMovement = (mark) => {
   }
 };
 
+const getMarkRadius = () => {
+  if (window.screen.width < 480) return 35;
+  else if (window.screen.width < 768) return 30;
+  else return 25;
+};
+
 const addMark = (id, interactiveLayer, x, y, color, name) => {
   // markWithText.addEventListener("dragend", (e) => {
   //   const coords = translateCoords(markWithText);
@@ -320,7 +326,7 @@ const addMark = (id, interactiveLayer, x, y, color, name) => {
   //   document.getElementById("coordY").innerText = coords.y;
   // });
 
-  const markRadius = 25;
+  const markRadius = getMarkRadius();
   const markAngle = 60;
   const markRotation = -1 * (90 + markAngle / 2);
 
@@ -521,6 +527,19 @@ const createTooltip = () => {
   return tooltip;
 };
 
+const changeMarksRadius = () => {
+  const newRadius = getMarkRadius();
+  const currentIndex = Number(localStorage.getItem("currentEventsIndex"));
+
+  const firstMark = stage.findOne("#" + String(EVENTS[currentIndex].first.id));
+  firstMark.radius(newRadius);
+
+  const secondMark = stage.findOne(
+    "#" + String(EVENTS[currentIndex].second.id)
+  );
+  secondMark.radius(newRadius);
+};
+
 window.addEventListener("load", () => {
   const collectiveMemoryQuestionnaire = document.getElementById(
     "collective-memory-questionnaire"
@@ -549,4 +568,6 @@ window.addEventListener("load", () => {
 
   const submit = document.getElementById("submit");
   submit.addEventListener("click", submitAnswers);
+
+  window.addEventListener("resize", changeMarksRadius);
 });
