@@ -187,6 +187,8 @@ const createMarksSpawnEvent = (
     fontFamily: FONT_FAMILY,
     fill: COLORS.text,
   });
+  alert(text.width());
+  alert(text.fontSize());
   text.offsetY(text.fontSize() / 2 - radius / 2);
 
   if (staticMarkColor === "#ff0000") {
@@ -459,7 +461,7 @@ const placeMarks = () => {
   firstMark.on("mouseout", () => hideTooltip());
 
   // показывает подсказку при нажатии на метку со смартфона
-  firstMark.on("touchstart", () => showTooltip(secondEventText, secondMark));
+  firstMark.on("touchstart", () => showTooltip(firstEventText, firstMark));
   firstMark.on("touchend", () => hideTooltip());
 
   secondMark.draggable(false);
@@ -542,7 +544,6 @@ const changeMarksRadius = () => {
   const newRadius = getMarkRadius();
   const currentIndex = Number(localStorage.getItem("currentEventsIndex"));
   for (let i = 0; i <= currentIndex; i++) {
-    console.log(EVENTS[i])
     const firstMarkId = String(EVENTS[i].first.id);
     changeMarkRadius(firstMarkId, newRadius);
     const secondMarkId = String(EVENTS[i].second.id);
