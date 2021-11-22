@@ -504,27 +504,6 @@ const placeMarks = () => {
   }
 };
 
-// отправляет результаты опроса на сервер
-const submitAnswers = () => {
-  const gender = getCheckedRadio("gender");
-  const yearOfBirth = document.getElementById("year-of-birth").value;
-  const permKraiLiving = getCheckedRadio("perm-krai-living");
-  const education = document.getElementById("education").value;
-  const profession = document.getElementById("profession").value;
-  const activites = getActivities();
-
-  const data = {
-    Gender: gender,
-    Year: yearOfBirth,
-    PremKrai: permKraiLiving,
-    Education: education,
-    Profession: profession,
-    Activities: activites,
-  };
-
-  console.log(data);
-};
-
 const createTooltip = () => {
   tooltip = new Konva.Text({
     id: TOOLTIP_ID,
@@ -593,9 +572,6 @@ window.addEventListener("load", () => {
 
   const placeMarksButton = document.getElementById("place-marks");
   placeMarksButton.addEventListener("click", placeMarks);
-
-  const submit = document.getElementById("submit");
-  submit.addEventListener("click", submitAnswers);
 
   window.addEventListener("resize", changeMarksRadius);
   window.addEventListener("resize", changeEventsFontSize);
