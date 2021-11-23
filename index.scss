@@ -246,6 +246,10 @@ input[type="number"] {
   padding: 0;
 }
 
+#small-screen-alert {
+  display: none;
+}
+
 @media only screen and (max-width: 1200px) {
   h1 {
     font-size: 42px;
@@ -279,5 +283,16 @@ input[type="number"] {
   #main,
   #footer {
     padding: 40px 10px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #main,
+  #footer {
+    display: none;
+  }
+
+  #small-screen-alert {
+    display: inline;
   }
 }
