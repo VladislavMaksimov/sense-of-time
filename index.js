@@ -389,30 +389,6 @@ const drawMarks = () => {
   interactiveLayer.draw();
 };
 
-// получает значения выбранных кнопок (radio buttons)
-const getCheckedRadio = (name) => {
-  const radioButtons = document.getElementsByName(name);
-  let value = null;
-  for (let i = 0; i < radioButtons.length; i++)
-    if (radioButtons[i].checked) {
-      value = radioButtons[i].value;
-      break;
-    }
-  return value;
-};
-
-// получает сферы деятельности
-const getActivities = () => {
-  let activities = [];
-  const activityItems = document.getElementsByClassName("activities-item");
-  for (let i = 0; i < activityItems.length; i++) {
-    const name = activityItems[i].children[1].children[0].name;
-    const value = getCheckedRadio(name);
-    activities.push({ name: value });
-  }
-  return activities;
-};
-
 const disablePlaceMarksButton = () => {
   const placeMarksButton = document.getElementById("place-marks");
   placeMarksButton.removeEventListener("click", placeMarks);
