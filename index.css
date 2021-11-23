@@ -269,8 +269,8 @@ input[type="number"] {
   padding: 0;
 }
 
-#small-screen-alert {
-  display: none;
+.small-alert {
+  color: #ff0000;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -302,11 +302,9 @@ input[type="number"] {
 }
 
 @media only screen and (max-width: 768px) {
+  #header,
   #main,
   #footer {
-    display: none;
-  }
-  #small-screen-alert {
-    display: inline;
+    padding: 40px 10px;
   }
 }
