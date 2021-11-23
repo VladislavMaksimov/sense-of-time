@@ -55,10 +55,10 @@ const addCoordLines = (background) => {
   const pointerLength = 10;
   const halfOfCoordField = (backgroundHeight - marksSpawnHeight) / 2;
   const halfOfCoordLineY = halfOfCoordField - pointerLength - 15;
-  const lengthOfCoordLineX = backgroundWidth - pointerLength;
+  const lengthOfCoordLineX = backgroundWidth - pointerLength / 2;
 
   // ось X
-  const xCoordLineX = (backgroundWidth - lengthOfCoordLineX) / 2;
+  const xCoordLineX = 0;
   const yCoordLineX = marksSpawnHeight + halfOfCoordField;
   const vectorXCoordLineX = lengthOfCoordLineX;
   const vectorYCoordLineX = 0;
@@ -303,6 +303,7 @@ const restrictMovementYup = (mark) => {
   if (y <= marksSpawnHeight + 8 + 15) mark.y(marksSpawnHeight + 8 + 15);
 };
 
+// ограничивает перемещение меток
 const restrictMovement = (mark) => {
   const markPosition = mark.absolutePosition();
   const x = markPosition.x;
