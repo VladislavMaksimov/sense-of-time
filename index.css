@@ -302,14 +302,6 @@ input[type="number"] {
 }
 
 @media only screen and (max-width: 768px) {
-  #header,
-  #main,
-  #footer {
-    padding: 40px 10px;
-  }
-}
-
-@media only screen and (max-width: 480px) {
   #main,
   #footer {
     display: none;
