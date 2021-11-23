@@ -1,6 +1,6 @@
 const FONT_SIZE_SMALL = 14;
-const FONT_SIZE_AVERAGE = 18;
-const FONT_SIZE_LARGE = 20;
+const FONT_SIZE_AVERAGE = 16;
+const FONT_SIZE_LARGE = 18;
 const FONT_FAMILY = "Calibri";
 
 const TEXT_SIGNIFICANT = "Заметность";
