@@ -561,5 +561,14 @@
     <script type="module" src="./firebase.js"></script>
 
     <!--<![endif]-->
+
+    <script>
+      var isIE = /*@cc_on!@*/false || !!document.documentMode;
+      if (isIE) {
+        var body = document.body;
+        body.innerHTML = '<h1 class="critical-alert">Наш опросник не поддерживает Internet Explorer. Пожалуйста, зайдите с другого браузера.</h1>';
+      }
+    </script>
+
   </body>
 </html>
