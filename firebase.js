@@ -37,9 +37,10 @@ const getActivities = () => {
   let activities = [];
   const activityItems = document.getElementsByClassName("activities-item");
   for (let i = 0; i < activityItems.length; i++) {
-    const name = activityItems[i].querySelector(".radio-container").children[0].name;
+    const name =
+      activityItems[i].querySelector(".radio-container").children[0].name;
     const value = getCheckedRadio(name);
-    const activity = {name: name, value: value};
+    const activity = { name: name, value: value };
     activities.push(activity);
   }
   return activities;
@@ -74,6 +75,7 @@ const submitAnswers = () => {
     Education: education,
     Profession: profession,
     Activities: activites,
+    version: VERSION,
   };
 
   try {
@@ -82,6 +84,8 @@ const submitAnswers = () => {
     alert(e);
     return;
   }
+
+  console.log(data);
 
   // const database = getDatabase();
 

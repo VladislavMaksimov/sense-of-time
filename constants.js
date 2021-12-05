@@ -1,3 +1,9 @@
+/* 
+   версия интерфейса: если какой-то важный элемент изменится,
+   по ней мы узнаем, как сопоставить полученные в разные периоды данные 
+*/
+const VERSION = 1;
+
 const FONT_SIZE_SMALL = 14;
 const FONT_SIZE_AVERAGE = 16;
 const FONT_SIZE_LARGE = 18;
