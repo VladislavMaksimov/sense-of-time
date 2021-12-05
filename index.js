@@ -524,7 +524,14 @@ const changeEventsFontSize = () => {
   secondEvent.fontSize(fontSize);
 };
 
+const validateNumberInput = (e, yearOfBirth) => {
+  if (e.key < "0" || e.key > "9" || yearOfBirth.length + 1 > 4) e.preventDefault();
+};
+
 window.addEventListener("load", () => {
+  const yearOfBirth = document.getElementById("year-of-birth");
+  yearOfBirth.addEventListener("keypress", (e) => validateNumberInput(e, yearOfBirth.value));
+
   const collectiveMemoryQuestionnaire = document.getElementById(
     "collective-memory-questionnaire"
   );
