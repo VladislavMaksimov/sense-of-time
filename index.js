@@ -331,6 +331,21 @@ const getMarkRadius = () => {
   else return 25;
 };
 
+const tryEnablePlaceButton = () => {
+  const currentIndex = Number(localStorage.getItem("currentEventsIndex"));
+  const mark1 = stage.findOne("#" + String(EVENTS[currentIndex].first.id));
+  const mark2 = stage.findOne("#" + String(EVENTS[currentIndex].second.id));
+  const mark1Y = mark1.absolutePosition().y;
+  const mark2Y = mark2.absolutePosition().y;
+  const placeMarksButton = document.getElementById("place-marks");
+
+  if (
+    mark1Y > marksSpawnHeight + 8 + 15 &&
+    mark2Y > marksSpawnHeight + 8 + 15
+  )
+    placeMarksButton.className = "button-enabled";
+};
+
 const addMark = (id, interactiveLayer, x, y, color, name) => {
   // markWithText.addEventListener("dragend", (e) => {
   //   const coords = translateCoords(markWithText);
@@ -361,6 +376,7 @@ const addMark = (id, interactiveLayer, x, y, color, name) => {
   );
 
   mark.on("dragmove", () => restrictMovement(mark));
+  mark.on("dragend", () => tryEnablePlaceButton());
 
   interactiveLayer.add(mark);
 };
@@ -389,7 +405,7 @@ const drawMarks = () => {
   interactiveLayer.draw();
 };
 
-const disablePlaceMarksButton = () => {
+const removeMarksAndPlaceMarksButton = () => {
   const placeMarksButton = document.getElementById("place-marks");
   placeMarksButton.removeEventListener("click", placeMarks);
   placeMarksButton.remove();
@@ -433,6 +449,8 @@ const placeMarks = () => {
   const firstEvent = stage.findOne("#first-event");
   const secondEvent = stage.findOne("#second-event");
 
+  const placeMarksButton = document.getElementById("place-marks");
+
   if (firstMarkY < marksSpawnHeight || secondMarkY < marksSpawnHeight) {
     alert(ALERT_TEXT_MARKS_NOT_IN_AREA);
     return;
@@ -462,11 +480,13 @@ const placeMarks = () => {
   secondMark.on("touchstart", () => showTooltip(secondEventText, secondMark));
   secondMark.on("touchend", () => hideTooltip());
 
+  placeMarksButton.className = "button-disabled";
+
   try {
     const newIndex = currentIndex + 1;
 
     if (newIndex >= EVENTS.length) {
-      disablePlaceMarksButton();
+      removeMarksAndPlaceMarksButton();
       return;
     }
 
@@ -525,12 +545,15 @@ const changeEventsFontSize = () => {
 };
 
 const validateNumberInput = (e, yearOfBirth) => {
-  if (e.key < "0" || e.key > "9" || yearOfBirth.length + 1 > 4) e.preventDefault();
+  if (e.key < "0" || e.key > "9" || yearOfBirth.length + 1 > 4)
+    e.preventDefault();
 };
 
 window.addEventListener("load", () => {
   const yearOfBirth = document.getElementById("year-of-birth");
-  yearOfBirth.addEventListener("keypress", (e) => validateNumberInput(e, yearOfBirth.value));
+  yearOfBirth.addEventListener("keypress", (e) =>
+    validateNumberInput(e, yearOfBirth.value)
+  );
 
   const collectiveMemoryQuestionnaire = document.getElementById(
     "collective-memory-questionnaire"

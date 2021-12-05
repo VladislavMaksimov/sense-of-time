@@ -162,11 +162,20 @@ h3 {
 #place-marks {
   padding: 8px 16px;
   font-size: 16px;
-  color: #fff;
-  background-color: #74bdb0;
   -webkit-border-radius: 8px;
      -moz-border-radius: 8px;
           border-radius: 8px;
+}
+
+.button-disabled {
+  color: #000;
+  background-color: #aaa;
+  cursor: initial;
+}
+
+.button-enabled {
+  color: #fff;
+  background-color: #74bdb0;
   cursor: pointer;
 }
 
