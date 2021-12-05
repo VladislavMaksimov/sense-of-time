@@ -1,81 +1,67 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="ru">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Чувство времени</title>
-    <script src="./lib/konva.min.js"></script>
-    <script src="./constants.js"></script>
-    <script src="./index.js"></script>
-    <link rel="stylesheet" href="./index.css" />
+    <script type="text/javascript" src="./lib/konva.min.js"></script>
+    <script type="text/javascript" src="./constants.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+    <link rel="stylesheet" href="./index.css">
   </head>
   <body>
-
     <div id="header">
       <div id="header-content">
         <h1>Опросник «Чувства времени»</h1>
-        <img src="sandwatch.png" alt="" />
+        <img src="sandwatch.png" alt="">
       </div>
     </div>
 
     <!--[if IE]>
       <h1 class="critical-alert">
-        Наш опросник не поддерживает Internet Explorer. Пожалуйста, зайдите с другого браузера.
+        Наш опросник не поддерживает Internet Explorer. Пожалуйста, зайдите с
+        другого браузера.
       </h1>
     <![endif]-->
 
     <!--[if !IE]>-->
 
     <div id="main">
-
       <!-- Сообщение в случае, если не работает JavaScript -->
       <noscript>
         <h1 id="no-js-alert" class="critical-alert">
-          Если вы видите это сообщение, пожалуйста, включите JavaScript в вашем браузере или обновите браузер.
-        </h1> 
+          Если вы видите это сообщение, пожалуйста, включите JavaScript в вашем
+          браузере или обновите браузер.
+        </h1>
       </noscript>
       <!-- /Сообщение в случае, если не работает JavaScript -->
 
       <!-- Приветствие и фото команды -->
       <div id="greetings">
-        <p>
-          <img alt="" />
-          <p id="greetings-text">
-            Рады приветствовать на нашем ресурсе. Мы – команда из пермской Вышки,
-            занимаемся изучением субъективного восприятия локальной истории г.
-            Перми. Результаты проекта помогут развитию культурных мест города.
-            Внесите свой вклад и пройдите наш опрос.
-          </p>
+        <img src="" alt="">
+        <p id="greetings-text">
+          Рады приветствовать на нашем ресурсе. Мы – команда из пермской Вышки,
+          занимаемся изучением субъективного восприятия локальной истории г.
+          Перми. Результаты проекта помогут развитию культурных мест города.
+          Внесите свой вклад и пройдите наш опрос.
         </p>
       </div>
       <!-- /Приветствие и фото команды -->
 
-      <form id="common-questions">
+      <form id="common-questions" action="">
         <h2>Общие вопросы</h2>
 
         <!-- Выбор пола -->
         <div class="common-questions-item">
-          <p class="common-questions-item-label">
-            Пол
-          </p>
+          <p class="common-questions-item-label">Пол</p>
           <p>
             <label for="gender-male" class="left-radio radio-container">
-              <input 
-                type="radio" 
-                name="gender" 
-                id="gender-male"
-                value="М"
-              >
+              <input type="radio" name="gender" id="gender-male" value="М">
               <span class="custom-radio"></span>
               Мужской
             </label>
             <label for="gender-female" class="radio-container">
-              <input 
-                type="radio" 
-                name="gender" 
-                id="gender-female"
-                value="Ж"
-              >
+              <input type="radio" name="gender" id="gender-female" value="Ж">
               <span class="custom-radio"></span>
               Женский
             </label>
@@ -89,11 +75,10 @@
             <label for="year-of-birth">Год рождения</label>
           </p>
           <p>
-            <input 
-              type="number" 
-              name="year-of-birth" 
-              id="year-of-birth" 
-              min="1900" 
+            <input
+              type="text"
+              name="year-of-birth"
+              id="year-of-birth"
             >
           </p>
         </div>
@@ -105,10 +90,13 @@
             Вы живете сейчас или когда-либо жили в Пермском крае более года?
           </p>
           <p>
-            <label for="perm-krai-living-yes" class="left-radio radio-container">
-              <input 
-                type="radio" 
-                name="perm-krai-living" 
+            <label
+              for="perm-krai-living-yes"
+              class="left-radio radio-container"
+            >
+              <input
+                type="radio"
+                name="perm-krai-living"
                 id="perm-krai-living-yes"
                 value="да"
               >
@@ -116,12 +104,12 @@
               Да
             </label>
             <label for="perm-krai-living-no" class="radio-container">
-              <input 
-                type="radio" 
-                name="perm-krai-living" 
+              <input
+                type="radio"
+                name="perm-krai-living"
                 id="perm-krai-living-no"
                 value="нет"
-              >
+             >
               <span class="custom-radio"></span>
               Нет
             </label>
@@ -154,382 +142,379 @@
         <!-- Сферы деятельности пользователя -->
         <div class="common-questions-item last-item">
           <p class="common-questions-item-label">
-            Насколько вы вовлечены в данные сферы? 1 – совершенно не разбираюсь, 7 – являюсь экспертом.
+            Насколько вы вовлечены в данные сферы? 1 – совершенно не разбираюсь,
+            7 – являюсь экспертом.
           </p>
-          <p>
-            <table id="activities">
-              <thead>
-                <tr id="activities-first-row">
-                  <td class="activity"></td>
-                  <td>1</td>
-                  <td>2</td>
-                  <td>3</td>
-                  <td>4</td>
-                  <td>5</td>
-                  <td>6</td>
-                  <td>7</td>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Культура -->
-                <tr class="activities-item">
-                  <td class="activity">Культура</td>
-                  <td>
-                    <label for="culture-1" class="radio-container">
-                      <input 
-                        type="radio"
-                        name="culture"
-                        id="culture-1"
-                        value="1"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="culture-2" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="culture" 
-                        id="culture-2"
-                        value="2"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="culture-3" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="culture" 
-                        id="culture-3"
-                        value="3"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="culture-4" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="culture" 
-                        id="culture-4"
-                        value="4"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="culture-5" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="culture" 
-                        id="culture-5"
-                        value="5"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="culture-6" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="culture" 
-                        id="culture-6"
-                        value="6"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="culture-7" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="culture" 
-                        id="culture-7"
-                        value="7"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                </tr>
-                <!-- /Культура -->
+          <table id="activities">
+            <thead>
+              <tr id="activities-first-row">
+                <td class="activity"></td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Культура -->
+              <tr class="activities-item">
+                <td class="activity">Культура</td>
+                <td>
+                  <label for="culture-1" class="radio-container">
+                    <input
+                      type="radio"
+                      name="culture"
+                      id="culture-1"
+                      value="1"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="culture-2" class="radio-container">
+                    <input
+                      type="radio"
+                      name="culture"
+                      id="culture-2"
+                      value="2"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="culture-3" class="radio-container">
+                    <input
+                      type="radio"
+                      name="culture"
+                      id="culture-3"
+                      value="3"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="culture-4" class="radio-container">
+                    <input
+                      type="radio"
+                      name="culture"
+                      id="culture-4"
+                      value="4"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="culture-5" class="radio-container">
+                    <input
+                      type="radio"
+                      name="culture"
+                      id="culture-5"
+                      value="5"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="culture-6" class="radio-container">
+                    <input
+                      type="radio"
+                      name="culture"
+                      id="culture-6"
+                      value="6"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="culture-7" class="radio-container">
+                    <input
+                      type="radio"
+                      name="culture"
+                      id="culture-7"
+                      value="7"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+              </tr>
+              <!-- /Культура -->
 
-                <!-- Промышленность -->
-                <tr class="activities-item">
-                  <td class="activity">Промышленность</td>
-                  <td>
-                    <label for="industry-1" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="industry" 
-                        id="industry-1"
-                        value="1"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="industry-2" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="industry" 
-                        id="industry-2"
-                        value="2"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="industry-3" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="industry" 
-                        id="industry-3"
-                        value="3"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="industry-4" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="industry" 
-                        id="industry-4"
-                        value="4"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="industry-5" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="industry" 
-                        id="industry-5"
-                        value="5"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="industry-6" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="industry" 
-                        id="industry-6"
-                        value="6"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="industry-7" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="industry" 
-                        id="industry-7"
-                        value="7"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                </tr>
-                <!-- /Промышленность -->
+              <!-- Промышленность -->
+              <tr class="activities-item">
+                <td class="activity">Промышленность</td>
+                <td>
+                  <label for="industry-1" class="radio-container">
+                    <input
+                      type="radio"
+                      name="industry"
+                      id="industry-1"
+                      value="1"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="industry-2" class="radio-container">
+                    <input
+                      type="radio"
+                      name="industry"
+                      id="industry-2"
+                      value="2"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="industry-3" class="radio-container">
+                    <input
+                      type="radio"
+                      name="industry"
+                      id="industry-3"
+                      value="3"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="industry-4" class="radio-container">
+                    <input
+                      type="radio"
+                      name="industry"
+                      id="industry-4"
+                      value="4"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="industry-5" class="radio-container">
+                    <input
+                      type="radio"
+                      name="industry"
+                      id="industry-5"
+                      value="5"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="industry-6" class="radio-container">
+                    <input
+                      type="radio"
+                      name="industry"
+                      id="industry-6"
+                      value="6"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="industry-7" class="radio-container">
+                    <input
+                      type="radio"
+                      name="industry"
+                      id="industry-7"
+                      value="7"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+              </tr>
+              <!-- /Промышленность -->
 
-                <!-- История -->
-                <tr class="activities-item">
-                  <td class="activity">История</td>
-                  <td>
-                    <label for="history-1" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="history" 
-                        id="history-1"
-                        value="1"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="history-2" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="history" 
-                        id="history-2"
-                        value="2"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="history-3" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="history" 
-                        id="history-3"
-                        value="3"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="history-4" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="history" 
-                        id="history-4"
-                        value="4"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="history-5" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="history" 
-                        id="history-5"
-                        value="5"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="history-6" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="history" 
-                        id="history-6"
-                        value="6"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="history-7" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="history" 
-                        id="history-7"
-                        value="7"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                </tr>
-                <!-- /История -->
+              <!-- История -->
+              <tr class="activities-item">
+                <td class="activity">История</td>
+                <td>
+                  <label for="history-1" class="radio-container">
+                    <input
+                      type="radio"
+                      name="history"
+                      id="history-1"
+                      value="1"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="history-2" class="radio-container">
+                    <input
+                      type="radio"
+                      name="history"
+                      id="history-2"
+                      value="2"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="history-3" class="radio-container">
+                    <input
+                      type="radio"
+                      name="history"
+                      id="history-3"
+                      value="3"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="history-4" class="radio-container">
+                    <input
+                      type="radio"
+                      name="history"
+                      id="history-4"
+                      value="4"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="history-5" class="radio-container">
+                    <input
+                      type="radio"
+                      name="history"
+                      id="history-5"
+                      value="5"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="history-6" class="radio-container">
+                    <input
+                      type="radio"
+                      name="history"
+                      id="history-6"
+                      value="6"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="history-7" class="radio-container">
+                    <input
+                      type="radio"
+                      name="history"
+                      id="history-7"
+                      value="7"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+              </tr>
+              <!-- /История -->
 
-                <!-- Политика -->
-                <tr id="activities-last-row" class="activities-item">
-                  <td class="activity">Политика</td>
-                  <td>
-                    <label for="politics-1" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="politics" 
-                        id="politics-1"
-                        value="1"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="politics-2" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="politics" 
-                        id="politics-2"
-                        value="2"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="politics-3" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="politics" 
-                        id="politics-3"
-                        value="3"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="politics-4" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="politics" 
-                        id="politics-4"
-                        value="4"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="politics-5" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="politics" 
-                        id="politics-5"
-                        value="5"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="politics-6" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="politics" 
-                        id="politics-6"
-                        value="6"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                  <td>
-                    <label for="politics-7" class="radio-container">
-                      <input 
-                        type="radio" 
-                        name="politics" 
-                        id="politics-7"
-                        value="7"
-                      >
-                      <span class="custom-radio radio-without-label"></span>
-                    </label>
-                  </td>
-                </tr>
-                <!-- /Политика -->
-
-              </tbody>
-            </table>
-          </p>
+              <!-- Политика -->
+              <tr id="activities-last-row" class="activities-item">
+                <td class="activity">Политика</td>
+                <td>
+                  <label for="politics-1" class="radio-container">
+                    <input
+                      type="radio"
+                      name="politics"
+                      id="politics-1"
+                      value="1"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="politics-2" class="radio-container">
+                    <input
+                      type="radio"
+                      name="politics"
+                      id="politics-2"
+                      value="2"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="politics-3" class="radio-container">
+                    <input
+                      type="radio"
+                      name="politics"
+                      id="politics-3"
+                      value="3"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="politics-4" class="radio-container">
+                    <input
+                      type="radio"
+                      name="politics"
+                      id="politics-4"
+                      value="4"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="politics-5" class="radio-container">
+                    <input
+                      type="radio"
+                      name="politics"
+                      id="politics-5"
+                      value="5"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="politics-6" class="radio-container">
+                    <input
+                      type="radio"
+                      name="politics"
+                      id="politics-6"
+                      value="6"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+                <td>
+                  <label for="politics-7" class="radio-container">
+                    <input
+                      type="radio"
+                      name="politics"
+                      id="politics-7"
+                      value="7"
+                    >
+                    <span class="custom-radio radio-without-label"></span>
+                  </label>
+                </td>
+              </tr>
+              <!-- /Политика -->
+            </tbody>
+          </table>
         </div>
         <!-- /Сферы деятельности пользователя -->
-
       </form>
 
       <!-- Часть с опросом по истории Перми -->
       <div id="collective-memory">
         <h2>Шкалы времени</h2>
         <p>
-          Перед вами будут представлены пары исторических событий.
-          Вам необходимо расположить эти события на осях координат. <br>
-          Горизонтальная ось – это ось времени. Расположите события так, как считаете
-          правильным. Вертикальная ось – это ось важности события. Насколько лично 
-          для вас важно это событие? <br>
+          Перед вами будут представлены пары исторических событий. Вам
+          необходимо расположить эти события на осях координат. <br>
+          Горизонтальная ось – это ось времени. Расположите события так, как
+          считаете правильным. Вертикальная ось – это ось важности события.
+          Насколько лично для вас важно это событие? <br>
           Все ответы в опросе анонимны.
         </p>
         <h3>Поле исследования</h3>
         <p>
-          На шкале будут даны два события из истории города Перми. Вам необходимо 
-          разместить  их на шкале так, как вы лично считаете нужным. Посмотрите 
-          небольшую инструкцию, как использовать шкалу.<br>
+          На шкале будут даны два события из истории города Перми. Вам
+          необходимо разместить их на шкале так, как вы лично считаете нужным.
+          Посмотрите небольшую инструкцию, как использовать шкалу.<br>
           <b class="small-alert">
-            Если вы используете телефон, пожалуйста, поверните его горизонтально,
-            чтобы поле с метками полностью помещалось в экран.
+            Если вы используете телефон, пожалуйста, поверните его
+            горизонтально, чтобы поле с метками полностью помещалось в экран.
           </b>
         </p>
       </div>
@@ -546,28 +531,25 @@
       <div id="place-marks-wrapper">
         <button id="place-marks">Разместить</button>
       </div>
-      
+
       <!-- /Часть с опросом по истории Перми -->
-      
     </div>
 
     <div id="footer">
-      <button id="submit">
-        Закончить опрос
-      </button>
+      <button id="submit">Закончить опрос</button>
     </div>
 
     <script type="module" src="./firebase.js"></script>
 
     <!--<![endif]-->
 
-    <script>
-      var isIE = /*@cc_on!@*/false || !!document.documentMode;
+    <script type="text/javascript">
+      var isIE = /*@cc_on!@*/ false || !!document.documentMode;
       if (isIE) {
         var body = document.body;
-        body.innerHTML = '<div id="header"><div id="header-content"><h1>Опросник «Чувства времени»</h1><img src="sandwatch.png" alt="" /></div></div><h1 class="critical-alert">Наш опросник не поддерживает Internet Explorer. Пожалуйста, зайдите с другого браузера.</h1>';
+        body.innerHTML =
+          '<div id="header"><div id="header-content"><h1>Опросник «Чувства времени»</h1><img src="sandwatch.png" alt=""></div></div><h1 class="critical-alert">Наш опросник не поддерживает Internet Explorer. Пожалуйста, зайдите с другого браузера.</h1>';
       }
     </script>
-
   </body>
 </html>
