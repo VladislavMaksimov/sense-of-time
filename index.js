@@ -157,12 +157,6 @@ const addCoordTexts = (background, halfOfCoordField, lengthOfCoordLineX) => {
   background.add(leftText);
 };
 
-const getEventFontSize = () => {
-  if (window.screen.width < 768) {
-    return FONT_SIZE_AVERAGE;
-  } else return FONT_SIZE_LARGE;
-};
-
 const createMarksSpawnEvent = (
   id,
   staticMarkColor,
@@ -185,7 +179,7 @@ const createMarksSpawnEvent = (
   const textX = radius * 4;
   const textY = 0;
   const textWidth = marksSpawnAreaWidth / 2.5;
-  const fontSize = getEventFontSize();
+  const fontSize = FONT_SIZE_AVERAGE;
 
   const text = new Konva.Text({
     id: id,
@@ -536,14 +530,6 @@ const changeMarksRadius = () => {
   }
 };
 
-const changeEventsFontSize = () => {
-  const fontSize = getEventFontSize();
-  const firstEvent = stage.findOne("#first-event");
-  const secondEvent = stage.findOne("#second-event");
-  firstEvent.fontSize(fontSize);
-  secondEvent.fontSize(fontSize);
-};
-
 const validateNumberInput = (e, yearOfBirth) => {
   if (e.key < "0" || e.key > "9" || yearOfBirth.length + 1 > 4)
     e.preventDefault();
@@ -581,5 +567,4 @@ window.addEventListener("load", () => {
   placeMarksButton.addEventListener("click", placeMarks);
 
   window.addEventListener("resize", changeMarksRadius);
-  window.addEventListener("resize", changeEventsFontSize);
 });
