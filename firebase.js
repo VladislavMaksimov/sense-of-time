@@ -67,23 +67,31 @@ const submitAnswers = () => {
   const education = document.getElementById("education").value;
   const profession = document.getElementById("profession").value;
   const activites = getActivities();
+  const screenWidth = window.screen.width;
+  const screenHeight = window.screen.height;
 
   const data = {
-    Gender: gender,
-    Year: yearOfBirth,
-    PremKrai: permKraiLiving,
-    Education: education,
-    Profession: profession,
-    Activities: activites,
-    version: VERSION,
+    gender: gender,
+    year: yearOfBirth,
+    premKrai: permKraiLiving,
+    education: education,
+    profession: profession,
+    activities: activites,
+    metaData: {
+      interfaceVersion: VERSION,
+      screen: {
+        width: screenWidth,
+        height: screenHeight,
+      },
+    },
   };
 
-  try {
-    checkData(data);
-  } catch (e) {
-    alert(e);
-    return;
-  }
+  // try {
+  //   checkData(data);
+  // } catch (e) {
+  //   alert(e);
+  //   return;
+  // }
 
   console.log(data);
 
