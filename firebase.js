@@ -2,6 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.5.0/firebase
 import {
   getDatabase,
   ref,
+  push,
   set,
 } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.5.0/firebase-database.min.js";
 
@@ -72,12 +73,12 @@ const submitAnswers = () => {
 
   const data = {
     gender: gender,
-    year: yearOfBirth,
-    premKrai: permKraiLiving,
+    yearOfBirth: yearOfBirth,
+    permKraiLiving: permKraiLiving,
     education: education,
     profession: profession,
     activities: activites,
-    metaData: {
+    metadata: {
       interfaceVersion: VERSION,
       screen: {
         width: screenWidth,
@@ -86,20 +87,18 @@ const submitAnswers = () => {
     },
   };
 
-  // try {
-  //   checkData(data);
-  // } catch (e) {
-  //   alert(e);
-  //   return;
-  // }
+  try {
+    checkData(data);
+  } catch (e) {
+    alert(e);
+    return;
+  }
 
-  console.log(data);
+  const database = getDatabase();
+  const answers = ref(database, "/");
+  const newDataRef = push(answers)
 
-  // const database = getDatabase();
-
-  // set(ref(database, "data/"), {
-  //   data: data,
-  // });
+  set(newDataRef, data);
 };
 
 const submit = document.getElementById("submit");
