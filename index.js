@@ -1,5 +1,3 @@
-Konva.pixelRatio = 2;
-
 let stage = null;
 let interactiveLayer = new Konva.Layer();
 let tooltipLayer = new Konva.Layer();
@@ -20,11 +18,17 @@ const blueMarkCoords = {
 };
 
 // переводит координаты из системы элемента canvas (считаются от левого верхнего угла) в нашу систему координат
-const translateCoords = (shape) => {
-  const canvasCoordX = shape.getAttr("x");
-  const canvasCoordY = shape.getAttr("y");
+const translateCoords = (coords) => {
+  const canvasCoordX = coords.x;
+  const canvasCoordY = coords.y;
+
   const ourCoordX = canvasCoordX - backgroundWidth / 2;
-  const ourCoordY = backgroundHeight / 2 - canvasCoordY;
+
+  const marksSpawnHeightAndOffset = marksSpawnHeight + 8 + 15;
+  const coordLineYLength = backgroundHeight - marksSpawnHeightAndOffset;
+  const coordYFromLineYTop = canvasCoordY - marksSpawnHeightAndOffset;
+  const ourCoordY = coordLineYLength / 2 - coordYFromLineYTop;
+
   return { x: ourCoordX, y: ourCoordY };
 };
 
@@ -333,10 +337,7 @@ const tryEnablePlaceButton = () => {
   const mark2Y = mark2.absolutePosition().y;
   const placeMarksButton = document.getElementById("place-marks");
 
-  if (
-    mark1Y > marksSpawnHeight + 8 + 15 &&
-    mark2Y > marksSpawnHeight + 8 + 15
-  )
+  if (mark1Y > marksSpawnHeight + 8 + 15 && mark2Y > marksSpawnHeight + 8 + 15)
     placeMarksButton.className = "button-enabled";
 };
 
