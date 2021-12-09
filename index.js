@@ -25,7 +25,8 @@ const translateCoords = (coords) => {
   const ourCoordX = canvasCoordX - backgroundWidth / 2;
 
   const marksSpawnHeightAndOffset = marksSpawnHeight + 8 + 15;
-  const coordLineYLength = backgroundHeight - marksSpawnHeightAndOffset;
+  // 20 - количество пикселей, которое остаётся под осью Y
+  const coordLineYLength = backgroundHeight - marksSpawnHeightAndOffset - 20;
   const coordYFromLineYTop = canvasCoordY - marksSpawnHeightAndOffset;
   const ourCoordY = coordLineYLength / 2 - coordYFromLineYTop;
 
