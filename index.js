@@ -307,9 +307,17 @@ const restrictMovement = (mark) => {
   const markPosition = mark.absolutePosition();
   const x = markPosition.x;
   const y = markPosition.y;
-  if (x <= 0) mark.x(0);
-  else if (x >= backgroundWidth) mark.x(backgroundWidth);
-  if (y >= backgroundHeight - 20) mark.y(backgroundHeight - 20);
+
+  // ограничения: сверху, снизу, слева, справа
+  const yUp = mark.height() / 2;
+  const yDown = backgroundHeight - 20;
+  const xLeft = 0;
+  const xRight = backgroundWidth;
+
+  if (x <= xLeft) mark.x(xLeft);
+  if (x >= xRight) mark.x(xRight);
+  if (y <= yUp) mark.y(yUp);
+  if (y >= yDown) mark.y(yDown);
   if (
     y >= marksSpawnHeight + 8 + 15 &&
     JSON.parse(localStorage.getItem(mark.name())).hitCoordArea === "false"
