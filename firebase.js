@@ -65,7 +65,9 @@ const getMarks = () => {
 };
 
 // отправляет результаты опроса на сервер
-const submitAnswers = () => {
+const submitAnswers = (submit) => {
+  submit.disabled = true;
+
   const gender = getCheckedRadio("gender");
   const yearOfBirth = document.getElementById("year-of-birth").value;
   const permKraiLiving = getCheckedRadio("perm-krai-living");
@@ -97,6 +99,7 @@ const submitAnswers = () => {
     checkData(data);
   } catch (e) {
     alert(e);
+    submit.disabled = false;
     return;
   }
 
@@ -104,16 +107,17 @@ const submitAnswers = () => {
     const database = getDatabase();
     const answers = ref(database, "/");
     const newDataRef = push(answers);
-    set(newDataRef, data);
+    set(newDataRef, data).then(
+      () => (document.location.href = "./success.html")
+    );
   } catch {
     alert(
       "На нашей стороне возникла какая-то ошибка. Пожалуйста, сообщите нам об этом."
     );
+    submit.disabled = false;
     return;
   }
-
-  document.location.href = "./success.html";
 };
 
 const submit = document.getElementById("submit");
-submit.addEventListener("click", submitAnswers);
+submit.addEventListener("click", () => submitAnswers(submit));
