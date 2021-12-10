@@ -6,6 +6,7 @@ let marksSpawnArea = null;
 let backgroundWidth = BACKGROUND_WIDTH_INITIAL;
 let backgroundHeight = BACKGROUND_HEIGHT_INITIAL;
 let marksSpawnHeight = BACKGROUND_HEIGHT_INITIAL / 5;
+localStorage.setItem("marks", "[]");
 localStorage.setItem("currentEventsIndex", "0");
 
 const redMarkCoords = {
@@ -351,12 +352,6 @@ const tryEnablePlaceButton = () => {
 };
 
 const addMark = (id, interactiveLayer, x, y, color, name) => {
-  // markWithText.addEventListener("dragend", (e) => {
-  //   const coords = translateCoords(markWithText);
-  //   document.getElementById("coordX").innerText = coords.x;
-  //   document.getElementById("coordY").innerText = coords.y;
-  // });
-
   const markRadius = getMarkRadius();
   const markAngle = 60;
   const markRotation = -1 * (90 + markAngle / 2);
@@ -483,6 +478,22 @@ const placeMarks = () => {
   // показывает подсказку при нажатии на метку со смартфона
   secondMark.on("touchstart", () => showTooltip(secondEventText, secondMark));
   secondMark.on("touchend", () => hideTooltip());
+
+  const savedMarks = JSON.parse(localStorage.getItem("marks"));
+  const marks = savedMarks ? savedMarks : [];
+  const firstMarkCoords = translateCoords(firstMark.absolutePosition());
+  const secondMarkCoords = translateCoords(secondMark.absolutePosition());
+  marks.push({
+    name: firstEventText,
+    x: firstMarkCoords.x,
+    y: firstMarkCoords.y,
+  });
+  marks.push({
+    name: secondEventText,
+    x: secondMarkCoords.x,
+    y: secondMarkCoords.y,
+  });
+  localStorage.setItem("marks", JSON.stringify(marks));
 
   placeMarksButton.className = "button-disabled";
 

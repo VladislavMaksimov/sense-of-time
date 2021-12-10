@@ -48,16 +48,20 @@ const getActivities = () => {
 };
 
 const checkData = (data) => {
-  if (data.Gender === null) throw "Пожалуйста, выберите ваш пол.";
-  if (data.Year === "") throw "Пожалуйста, введите год рождения.";
-  if (data.PremKrai === null)
+  if (data.gender === null) throw "Пожалуйста, выберите ваш пол.";
+  if (data.year === "") throw "Пожалуйста, введите год рождения.";
+  if (data.permKraiLiving === null)
     throw "Пожалуйста, ответьте на вопрос о проживании в Пермском крае.";
-  if (data.Education === "") throw "Пожалуйста, напишите ваше образование.";
-  if (data.Profession === "") throw "Пожалуйста, напишите вашу профессию.";
-  data.Activities.forEach((activity) => {
+  if (data.education === "") throw "Пожалуйста, напишите ваше образование.";
+  if (data.profession === "") throw "Пожалуйста, напишите вашу профессию.";
+  data.activities.forEach((activity) => {
     if (activity.value === null)
       throw "Пожалуйста, ответьте на вопрос про сферы деятельности.";
   });
+};
+
+const getMarks = () => {
+  return JSON.parse(localStorage.getItem("marks"));
 };
 
 // отправляет результаты опроса на сервер
@@ -68,6 +72,7 @@ const submitAnswers = () => {
   const education = document.getElementById("education").value;
   const profession = document.getElementById("profession").value;
   const activites = getActivities();
+  const marks = getMarks();
   const screenWidth = window.screen.width;
   const screenHeight = window.screen.height;
 
@@ -78,6 +83,7 @@ const submitAnswers = () => {
     education: education,
     profession: profession,
     activities: activites,
+    marks: marks,
     metadata: {
       interfaceVersion: VERSION,
       screen: {
@@ -96,7 +102,7 @@ const submitAnswers = () => {
 
   const database = getDatabase();
   const answers = ref(database, "/");
-  const newDataRef = push(answers)
+  const newDataRef = push(answers);
 
   set(newDataRef, data);
 };
