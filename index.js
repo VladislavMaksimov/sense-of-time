@@ -485,13 +485,13 @@ const placeMarks = () => {
   const secondMarkCoords = translateCoords(secondMark.absolutePosition());
   marks.push({
     name: firstEventText,
-    x: firstMarkCoords.x,
-    y: firstMarkCoords.y,
+    x: Math.round(firstMarkCoords.x),
+    y: Math.round(firstMarkCoords.y),
   });
   marks.push({
     name: secondEventText,
-    x: secondMarkCoords.x,
-    y: secondMarkCoords.y,
+    x: Math.round(secondMarkCoords.x),
+    y: Math.round(secondMarkCoords.y),
   });
   localStorage.setItem("marks", JSON.stringify(marks));
 
