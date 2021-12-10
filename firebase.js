@@ -49,7 +49,7 @@ const getActivities = () => {
 
 const checkData = (data) => {
   if (data.gender === null) throw "Пожалуйста, выберите ваш пол.";
-  if (data.year === "") throw "Пожалуйста, введите год рождения.";
+  if (data.yearOfBirth === "") throw "Пожалуйста, введите год рождения.";
   if (data.permKraiLiving === null)
     throw "Пожалуйста, ответьте на вопрос о проживании в Пермском крае.";
   if (data.education === "") throw "Пожалуйста, напишите ваше образование.";
