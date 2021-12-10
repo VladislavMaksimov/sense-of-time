@@ -60,8 +60,13 @@ const createCoordLine = (x, y, vectorX, vectorY, pointerLength) => {
 const addCoordLines = (background) => {
   const pointerLength = 10;
   const halfOfCoordField = (backgroundHeight - marksSpawnHeight) / 2;
-  const halfOfCoordLineY = halfOfCoordField - pointerLength - 15;
   const lengthOfCoordLineX = backgroundWidth - pointerLength / 2;
+  const halfOfCoordLineY = lengthOfCoordLineX / 2;
+
+  console.log(backgroundHeight)
+  console.log(BACKGROUND_HEIGHT_INITIAL)
+  console.log(marksSpawnHeight)
+  console.log(backgroundHeight - marksSpawnHeight - 23 - 20)
 
   // ось X
   const xCoordLineX = 0;
@@ -269,7 +274,7 @@ const drawMarksSpawn = (backgroundLayer) => {
 
   marksSpawnArea = new Konva.Rect({
     width: backgroundWidth - 8,
-    height: backgroundHeight / 5,
+    height: 162,
     fill: COLORS.marksSpawnBackground,
     stroke: COLORS.marksSpawnStroke,
     strokeWidth: 4,
@@ -376,6 +381,7 @@ const addMark = (id, interactiveLayer, x, y, color, name) => {
 
   mark.on("dragmove", () => restrictMovement(mark));
   mark.on("dragend", () => tryEnablePlaceButton());
+  mark.on("dragend", () => console.log(translateCoords(mark.absolutePosition())))
 
   interactiveLayer.add(mark);
 };
