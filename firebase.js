@@ -58,6 +58,8 @@ const checkData = (data) => {
     if (activity.value === null)
       throw "Пожалуйста, ответьте на вопрос про сферы деятельности.";
   });
+  if (data.marks.length < EVENTS.length * 2)
+    throw "Пожалуйста, поместите все события на шкалу.";
 };
 
 const getMarks = () => {
