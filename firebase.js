@@ -100,11 +100,19 @@ const submitAnswers = () => {
     return;
   }
 
-  const database = getDatabase();
-  const answers = ref(database, "/");
-  const newDataRef = push(answers);
+  try {
+    const database = getDatabase();
+    const answers = ref(database, "/");
+    const newDataRef = push(answers);
+    set(newDataRef, data);
+  } catch {
+    alert(
+      "На нашей стороне возникла какая-то ошибка. Пожалуйста, сообщите нам об этом."
+    );
+    return;
+  }
 
-  set(newDataRef, data);
+  document.location.href = "./success.html";
 };
 
 const submit = document.getElementById("submit");

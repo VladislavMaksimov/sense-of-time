@@ -1,0 +1,42 @@
+@font-face {
+  font-family: "Myriad Pro Regular";
+  src: url("./fonts/MyriadPro-Regular.eot");
+  src: url("./fonts/MyriadPro-Regular.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/MyriadPro-Regular.woff") format("woff"),
+    url("./fonts/MyriadPro-Regular.ttf") format("truetype");
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  font-family: "Myriad Pro Regular", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  min-width: 768px;
+}
+
+h1 {
+  font-weight: normal;
+  font-style: normal;
+  font-size: 48px;
+  line-height: 64px;
+}
+
+.thanks-wrapper {
+  text-align: center;
+}
+
+.thanks {
+  color: #46db14;
+}
+
+#main {
+  border-bottom: none;
+}
