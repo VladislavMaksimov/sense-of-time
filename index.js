@@ -63,11 +63,6 @@ const addCoordLines = (background) => {
   const lengthOfCoordLineX = backgroundWidth - pointerLength / 2;
   const halfOfCoordLineY = lengthOfCoordLineX / 2;
 
-  console.log(backgroundHeight)
-  console.log(BACKGROUND_HEIGHT_INITIAL)
-  console.log(marksSpawnHeight)
-  console.log(backgroundHeight - marksSpawnHeight - 23 - 20)
-
   // ось X
   const xCoordLineX = 0;
   const yCoordLineX = marksSpawnHeight + halfOfCoordField;
@@ -381,7 +376,6 @@ const addMark = (id, interactiveLayer, x, y, color, name) => {
 
   mark.on("dragmove", () => restrictMovement(mark));
   mark.on("dragend", () => tryEnablePlaceButton());
-  mark.on("dragend", () => console.log(translateCoords(mark.absolutePosition())))
 
   interactiveLayer.add(mark);
 };
@@ -562,10 +556,19 @@ const validateNumberInput = (e, yearOfBirth) => {
     e.preventDefault();
 };
 
+const removeWrongInputChars = (yearOfBirthElement) => {
+  const chars = yearOfBirthElement.value.split("");
+  const filteredChars = chars.filter((char) => char >= "0" && char <= "9");
+  yearOfBirthElement.value = filteredChars.join("");
+};
+
 window.addEventListener("load", () => {
   const yearOfBirth = document.getElementById("year-of-birth");
   yearOfBirth.addEventListener("keypress", (e) =>
     validateNumberInput(e, yearOfBirth.value)
+  );
+  yearOfBirth.addEventListener("input", () =>
+    removeWrongInputChars(yearOfBirth)
   );
 
   const collectiveMemoryQuestionnaire = document.getElementById(
