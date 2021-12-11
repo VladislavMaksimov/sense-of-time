@@ -65,7 +65,7 @@ const addCoordLines = (background) => {
 
   // ось X
   const xCoordLineX = 0;
-  const yCoordLineX = marksSpawnHeight + halfOfCoordField;
+  const yCoordLineX = marksSpawnHeight + halfOfCoordField + 1;
   const vectorXCoordLineX = lengthOfCoordLineX;
   const vectorYCoordLineX = 0;
   const coordLineX = createCoordLine(
