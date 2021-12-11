@@ -60,12 +60,12 @@ const createCoordLine = (x, y, vectorX, vectorY, pointerLength) => {
 const addCoordLines = (background) => {
   const pointerLength = 10;
   const halfOfCoordField = (backgroundHeight - marksSpawnHeight) / 2;
-  const halfOfCoordLineY = halfOfCoordField - pointerLength - 15;
   const lengthOfCoordLineX = backgroundWidth - pointerLength / 2;
+  const halfOfCoordLineY = lengthOfCoordLineX / 2;
 
   // ось X
   const xCoordLineX = 0;
-  const yCoordLineX = marksSpawnHeight + halfOfCoordField;
+  const yCoordLineX = marksSpawnHeight + halfOfCoordField + 1;
   const vectorXCoordLineX = lengthOfCoordLineX;
   const vectorYCoordLineX = 0;
   const coordLineX = createCoordLine(
@@ -268,8 +268,8 @@ const drawMarksSpawn = (backgroundLayer) => {
   });
 
   marksSpawnArea = new Konva.Rect({
-    width: backgroundWidth - 8,
-    height: backgroundHeight / 5,
+    width: backgroundWidth - 5,
+    height: 162,
     fill: COLORS.marksSpawnBackground,
     stroke: COLORS.marksSpawnStroke,
     strokeWidth: 4,
@@ -347,7 +347,7 @@ const tryEnablePlaceButton = () => {
   const mark2Y = mark2.absolutePosition().y;
   const placeMarksButton = document.getElementById("place-marks");
 
-  if (mark1Y > marksSpawnHeight + 8 + 15 && mark2Y > marksSpawnHeight + 8 + 15)
+  if (mark1Y >= marksSpawnHeight + 8 + 15 && mark2Y >= marksSpawnHeight + 8 + 15)
     placeMarksButton.className = "button-enabled";
 };
 
@@ -556,10 +556,19 @@ const validateNumberInput = (e, yearOfBirth) => {
     e.preventDefault();
 };
 
+const removeWrongInputChars = (yearOfBirthElement) => {
+  const chars = yearOfBirthElement.value.split("");
+  const filteredChars = chars.filter((char) => char >= "0" && char <= "9");
+  yearOfBirthElement.value = filteredChars.join("");
+};
+
 window.addEventListener("load", () => {
   const yearOfBirth = document.getElementById("year-of-birth");
   yearOfBirth.addEventListener("keypress", (e) =>
     validateNumberInput(e, yearOfBirth.value)
+  );
+  yearOfBirth.addEventListener("input", () =>
+    removeWrongInputChars(yearOfBirth)
   );
 
   const collectiveMemoryQuestionnaire = document.getElementById(
