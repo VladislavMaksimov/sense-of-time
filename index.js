@@ -347,7 +347,7 @@ const tryEnablePlaceButton = () => {
   const mark2Y = mark2.absolutePosition().y;
   const placeMarksButton = document.getElementById("place-marks");
 
-  if (mark1Y > marksSpawnHeight + 8 + 15 && mark2Y > marksSpawnHeight + 8 + 15)
+  if (mark1Y >= marksSpawnHeight + 8 + 15 && mark2Y >= marksSpawnHeight + 8 + 15)
     placeMarksButton.className = "button-enabled";
 };
 
