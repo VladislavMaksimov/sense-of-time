@@ -268,7 +268,7 @@ const drawMarksSpawn = (backgroundLayer) => {
   });
 
   marksSpawnArea = new Konva.Rect({
-    width: backgroundWidth - 8,
+    width: backgroundWidth - 5,
     height: 162,
     fill: COLORS.marksSpawnBackground,
     stroke: COLORS.marksSpawnStroke,
