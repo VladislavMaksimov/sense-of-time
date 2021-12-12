@@ -47,6 +47,10 @@ const getActivities = () => {
   return activities;
 };
 
+const getMarks = () => {
+  return JSON.parse(localStorage.getItem("marks"));
+};
+
 const checkData = (data) => {
   if (data.gender === null) throw "Пожалуйста, выберите ваш пол.";
   if (data.yearOfBirth === "") throw "Пожалуйста, введите год рождения.";
@@ -62,8 +66,12 @@ const checkData = (data) => {
     throw "Пожалуйста, поместите все события на шкалу.";
 };
 
-const getMarks = () => {
-  return JSON.parse(localStorage.getItem("marks"));
+const checkPrivacyPolicyAcception = () => {
+  const isAccepted = document.getElementById(
+    "privacy-policy-acception-check"
+  ).checked;
+  if (!isAccepted)
+    throw "Пожалуйста, ознакомьтесь с политикой конфиденциальности и дайте согласие на обработку данных.";
 };
 
 // отправляет результаты опроса на сервер
@@ -99,6 +107,14 @@ const submitAnswers = (submit) => {
 
   try {
     checkData(data);
+  } catch (e) {
+    alert(e);
+    submit.disabled = false;
+    return;
+  }
+
+  try {
+    checkPrivacyPolicyAcception();
   } catch (e) {
     alert(e);
     submit.disabled = false;
