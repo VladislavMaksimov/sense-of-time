@@ -197,3 +197,7 @@ input[type="number"] {
 .small-alert {
   color: #ff0000;
 }
+
+#privacy-policy-acception {
+  margin-top: 60px;
+}
