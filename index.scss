@@ -3,8 +3,8 @@
 }
 
 #greetings img {
-  width: 219px;
-  height: 139px;
+  width: 50%;
+  height: 50%;
   float: right;
 }
 
@@ -183,4 +183,10 @@ input[type="number"] {
 
 #privacy-policy-acception {
   margin-top: 60px;
+}
+
+@media only screen and (max-width: 960px) {
+  #greetings-text {
+    padding-right: 0;
+  }
 }
