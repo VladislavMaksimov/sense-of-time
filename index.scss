@@ -9,7 +9,7 @@
 }
 
 #greetings-text {
-  padding-right: 50%;
+  padding-right: 0;
   font-size: 20px;
   line-height: 32px;
 }
@@ -185,8 +185,3 @@ input[type="number"] {
   margin-top: 60px;
 }
 
-@media only screen and (max-width: 960px) {
-  #greetings-text {
-    padding-right: 0;
-  }
-}
